@@ -1,9 +1,12 @@
 .profile-card-container {
-    position: fixed;
-
     width: 20%;
     min-width: 300px;
 
+    text-align: center;
+}
+
+.profile-card-container > .header {
+    display: inline;
     text-align: center;
 }
 
