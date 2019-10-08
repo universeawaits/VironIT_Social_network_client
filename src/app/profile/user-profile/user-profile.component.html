@@ -1,11 +1,11 @@
-<mat-card class="profile-card-container">
-    <mat-card-header class="header">{{user.name}}</mat-card-header>
+<mat-card class="profile-card mat-elevation-z14">
+    <div class="profile-card-header">{{user.name}}</div>
+    <img src="{{user.avatarSrc}}" class="profile-card-avatar mat-elevation-z7">
     <mat-card-content>
-        <img src="{{user.avatarSrc}}" class="avatar">
         <br>
         {{user.email}}
         <br>
         {{user.phone}}
     </mat-card-content>
-    <mat-card-footer>Registered {{user.registered}}</mat-card-footer>
+    <div class="profile-card-footer">Registered {{user.registered}}</div>
 </mat-card>

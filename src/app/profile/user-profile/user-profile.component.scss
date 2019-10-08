@@ -1,21 +1,35 @@
-.profile-card-container {
-    width: 20%;
-    min-width: 300px;
+.profile-card {
+    background: inherit;
+    backdrop-filter: blur(10px);
 
+    border-radius: 0px;
+
+    min-width: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
-.profile-card-container > .header {
-    display: inline;
-    text-align: center;
-}
-
-.avatar {
+.profile-card-avatar {
+    padding: 1px;
+    border: 5px solid rgba($color: #000000, $alpha: 0.2);
     border-radius: 50%;
+    margin: 25px;
 
+    size: 100%;
     width: 100%;
-    min-width: inherit;
+    min-width: 100px;
     max-width: 250px;
+}
 
-    margin-bottom: 15px;
+.profile-card-header {
+    margin: 0;
+    padding: 10px;
+}
+
+.profile-card-footer {
+    margin: 0;
 }

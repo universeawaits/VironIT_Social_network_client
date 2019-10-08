@@ -1,17 +1,21 @@
-.background-container {
-    position: fixed;
-    left: 0;
-    right: 0;
-    background-image: url(../assets/background.jpg);
+$background-image: url(../assets/background.jpg);
+
+.content-container {
     height: 100%;
+
+    background-image: $background-image;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    overflow: hidden;
 }
 
-.content-container {
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 9999;
+.router-outlet-container {
+    height: calc(100vh - 64px - 64px);
+    width: inherit;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

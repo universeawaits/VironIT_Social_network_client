@@ -12,8 +12,8 @@ interface Action {
 })
 export class HeaderComponent implements OnInit {
   private actions: Action[] = [
-    { path: 'profile', icon: 'person_outline' },
-    { path: 'messages', icon: 'mail_outline' },
+    { path: 'profile', icon: 'person' },
+    { path: 'messages', icon: 'message' },
     { path: 'contacts', icon: 'contacts' }
   ];
 
