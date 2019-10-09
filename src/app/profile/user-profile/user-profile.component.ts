@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfile } from 'src/app/model/user.profile';
+import { FormGroup, FormControl, Validators, AbstractControl, NgForm } from '@angular/forms';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'user-profile',
@@ -7,16 +9,57 @@ import { UserProfile } from 'src/app/model/user.profile';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  mode: string = 'view';
+  changeModeIcon: string = 'edit';
+
   private avatarsFolderSrc = 'assets/avatars/';
   private user: UserProfile = new UserProfile();
+
+  private editForm: FormGroup;
 
   constructor() { }
 
   ngOnInit() {
     this.user.name = 'Tommy';
-    this.user.email = 'tommy.example@gmail.com';
+    this.user.email = 'tommdddddddddddddy.example@gmail.com';
     this.user.phone = '+375 (33) 660 40 66';
     this.user.registered = "19 Jun \'19";
     this.user.avatarSrc = this.avatarsFolderSrc + this.user.email + '.jpg';
+
+    let password: string; 
+    password = '12345'; // get its value from the server
+    this.editForm = new FormGroup({
+      name: new FormControl(this.user.name, [ Validators.required, Validators.pattern("^[a-zA-Z]+$"), Validators.maxLength(20), Validators.minLength(3) ]),
+      password: new FormControl(password, [ Validators.required ])
+    });
+  }
+
+  clearControl(controlName: string) {
+    this.editForm.get(controlName).setValue('');
+  }
+
+  updateUser() {
+    var nameControl = this.editForm.get('name');
+    if (nameControl.valid) {
+      this.user.name = nameControl.value;
+    }
+
+    var passwordControl = this.editForm.get('password');
+    if (passwordControl.valid) {
+      //for password just send request to the server and email user
+    }
+  }
+
+  cancelEdit() {
+    this.mode = (this.mode === 'view') ? 'edit' : 'view';
+    this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
+  }
+
+  changeMode() {
+    if (this.mode == 'edit') {
+      this.updateUser();
+    }
+    this.mode = (this.mode === 'view') ? 'edit' : 'view';
+    this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
   }
 }

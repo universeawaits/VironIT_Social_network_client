@@ -1,11 +1,51 @@
-<mat-card class="profile-card mat-elevation-z14">
-    <div class="profile-card-header">{{user.name}}</div>
-    <img src="{{user.avatarSrc}}" class="profile-card-avatar mat-elevation-z7">
-    <mat-card-content>
+<mat-card class="profile-card mat-elevation-z14" [class.edit-mode]="mode == 'edit'">
+    <form [formGroup]="editForm">
+        <div *ngIf="mode == 'view'" class="profile-card-header">{{user.name}}</div>
+        <div *ngIf="mode == 'edit'">
+            <mat-form-field *ngIf="mode == 'edit'">
+                <input matInput formControlName="name" type="text" placeholder="name" value="{{user.name}}">
+                <button mat-button matSuffix mat-icon-button (click)="clearControl('name')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="editForm.get('name').errors?.required">required</mat-error>
+                <mat-error *ngIf="editForm.get('name').errors?.pattern">alphabet characters only</mat-error>
+                <mat-error *ngIf="editForm.get('name').errors?.minlength || editForm.get('name').errors?.maxlength">count between 3 and 20</mat-error>
+            </mat-form-field>
+        </div>
+    
+        <img src="{{user.avatarSrc}}"
+            [matTooltipDisabled]="mode == 'view'"
+            matTooltip="change avatar"
+            [matTooltipPosition]="'right'"
+            matTooltipClass="tooltip"
+            class="profile-card-avatar mat-elevation-z7">
+
+        <div *ngIf="mode == 'edit'">
+            <mat-form-field>
+                <input matInput formControlName="password" type="password" placeholder="password">
+                <button mat-button matSuffix mat-icon-button aria-label="clear" (click)="clearControl('password')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="editForm.get('password').errors?.required">required</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div *ngIf="mode == 'view'" class="profile-card-content">
         <br>
         {{user.email}}
         <br>
         {{user.phone}}
-    </mat-card-content>
-    <div class="profile-card-footer">Registered {{user.registered}}</div>
+    </div>
+
+    <div *ngIf="mode == 'view'" class="profile-card-footer">Registered {{user.registered}}</div>
+    
+    <div class="profile-card-actions">
+        <button *ngIf="mode == 'edit'" mat-icon-button (click)="cancelEdit()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button mat-icon-button type="reset" [disabled]="editForm.invalid" (click)="changeMode()">
+            <mat-icon>{{changeModeIcon}}</mat-icon>
+        </button>
+    </div>
 </mat-card>

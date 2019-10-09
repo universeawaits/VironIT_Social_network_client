@@ -1,9 +1,9 @@
-<mat-toolbar class="header mat-elevation-z14">
+<mat-toolbar class="header mat-elevation-z8">
     <mat-toolbar-row>
         <span *ngFor="let action of actions">
-            <a mat-icon-button [routerLink]="[action.path]">
+            <button mat-icon-button disableRipple [routerLink]="[action.path]">
               <mat-icon>{{action.icon}}</mat-icon>
-            </a>
+            </button>
         </span>
     </mat-toolbar-row>
 </mat-toolbar>
