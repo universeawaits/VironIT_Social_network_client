@@ -218,6 +218,39 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   @include angular-material-theme($altTheme);
 }
 
+@mixin snack-theme($theme) {
+  // Extract whichever individual palettes you need from the theme.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $success: #45ca7c;
+  $error: #ca4557;
+
+  .mat-snack-bar-container {
+      color: $dark-text;
+      box-shadow: 0 0 8px rgba($color: $dark-text, $alpha: 0.2);
+      background: transparent;
+      backdrop-filter: blur(50px);
+      font-family: 'Montserrat' !important;
+      font-size: 14px;
+      border-radius: 0px !important;
+  }
+  //Added with panelClass property
+  .snack-error {
+    button {
+      color: $error;
+    }
+  }
+  //Added with panelClass property
+  .snack-success {
+    button {
+      color: $success;
+    }
+  }
+}
+
+@include snack-theme($theme);
+
 
 // Specific component overrides, pieces that are not in line with the general theming
 

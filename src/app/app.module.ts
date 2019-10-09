@@ -7,10 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './navigation/navigation.module';
 import { ProfileModule } from './profile/profile.module';
 import { ContactModule } from './contact/contact.module';
+import { SnackBarComponent } from './helper/snack-bar/snack-bar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -18,9 +21,16 @@ import { ContactModule } from './contact/contact.module';
     BrowserAnimationsModule,
     NavigationModule,
     ProfileModule,
-    ContactModule
+    ContactModule,
+    MatSnackBarModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    SnackBarComponent
+  ],
+  entryComponents: [
+    SnackBarComponent
+  ],
 })
 export class AppModule { }

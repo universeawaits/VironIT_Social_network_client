@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfile } from 'src/app/model/user.profile';
 import { FormGroup, FormControl, Validators, AbstractControl, NgForm } from '@angular/forms';
-import { stringify } from '@angular/compiler/src/util';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'user-profile',
@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
 
   private editForm: FormGroup;
 
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.user.name = 'Tommy';
@@ -53,13 +53,25 @@ export class UserProfileComponent implements OnInit {
   cancelEdit() {
     this.mode = (this.mode === 'view') ? 'edit' : 'view';
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
+
+    this.openSnackBar("changes discarded", 3);
   }
 
   changeMode() {
-    if (this.mode == 'edit') {
+    if (this.mode == 'edit') { // unnec?
       this.updateUser();
+      this.openSnackBar("changes saved", 3);
     }
     this.mode = (this.mode === 'view') ? 'edit' : 'view';
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
+  }
+
+  openSnackBar(message: string, duration: number) {
+    this._snackBar.open(message, 'ok', {
+      duration: duration * 1000,
+      panelClass: [ 'snack-success' ],
+      horizontalPosition: "right",
+      verticalPosition: "bottom"
+    });
   }
 }
