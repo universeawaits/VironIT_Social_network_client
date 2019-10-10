@@ -14,6 +14,7 @@ export class UserProfileComponent implements OnInit {
 
   private avatarsFolderSrc = 'assets/avatars/';
   private user: UserProfile = new UserProfile();
+  private password: string;
 
   private editForm: FormGroup;
 
@@ -26,11 +27,10 @@ export class UserProfileComponent implements OnInit {
     this.user.registered = "19 Jun \'19";
     this.user.avatarSrc = this.avatarsFolderSrc + this.user.email + '.jpg';
 
-    let password: string; 
-    password = '12345'; // get its value from the server
+    this.password = '12345'; // get its value from the server
     this.editForm = new FormGroup({
       name: new FormControl(this.user.name, [ Validators.required, Validators.pattern("^[a-zA-Z]+$"), Validators.maxLength(20), Validators.minLength(3) ]),
-      password: new FormControl(password, [ Validators.required ])
+      password: new FormControl(this.password, [ Validators.required ])
     });
   }
 
@@ -54,6 +54,8 @@ export class UserProfileComponent implements OnInit {
     this.mode = (this.mode === 'view') ? 'edit' : 'view';
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
 
+    this.editForm.get('name').setValue(this.user.name);
+    this.editForm.get('password').setValue(this.password);
     this.openSnackBar("changes discarded", 3);
   }
 

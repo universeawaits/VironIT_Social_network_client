@@ -6,12 +6,21 @@ $avatar-width: 250px;
 
     width: $avatar-width + 50px;
     border-radius: 0px;
+    height: $avatar-width * 2 - 20px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    transition: all 0.2s ease-in;
+}
+
+.profile-card-edit-mode {
+    height: $avatar-width * 2;
+
+    transition: all 0.2s ease-in;
 }
 
 .profile-card-header {
@@ -21,6 +30,7 @@ $avatar-width: 250px;
 
     text-shadow: 0 0 3px #e4e4e4;
     font-size: 24px;
+    transition: all 0.2s ease-in;
 }
 
 .profile-card-avatar {
@@ -39,15 +49,18 @@ $avatar-width: 250px;
     font-size: 16px;
 
     margin:  0 15px 15px 15px;
+    transition: all 0.2s ease-in;
 }
 
 .profile-card-footer {
     margin: 0;
+    transition: all 0.2s ease-in;
 }
 
 .profile-card-actions {
     padding: 5px;
     margin: 10px;
+    transition: all 0.2s ease-in;
 }
 
 mat-card {
