@@ -1,5 +1,27 @@
 $avatar-width: 250px;
 
+.contac-card {
+    width: $avatar-width + 50px;
+    height: $avatar-width * 2 - 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease-in;
+}
+
+.contact-card-header {
+    word-break: break-all;
+
+    margin: 15px;
+
+    text-shadow: 0 0 3px #e4e4e4;
+    font-size: 24px;
+    transition: all 0.2s ease-in;
+    text-align: center;
+}
 
 .contact-card-avatar {
     padding: 1px;
@@ -10,4 +32,30 @@ $avatar-width: 250px;
     width: $avatar-width;
   
     transition: all 0.2s ease-in;
+}
+
+.contact-card-content {
+    word-break: break-all;
+    font-size: 16px;
+
+    margin:  0 15px 15px 15px;
+    transition: all 0.2s ease-in;
+    text-align: center;
+}
+
+.contact-card-footer {
+    margin: 0;
+    transition: all 0.2s ease-in;
+    text-align: center;
+}
+
+.contact-card-actions {
+    padding: 5px;
+    margin: 10px;
+
+    text-align: center;
+}
+
+mat-card {
+    padding: 10px;
 }

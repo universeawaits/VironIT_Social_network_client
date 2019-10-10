@@ -310,3 +310,11 @@ mat-error {
   margin: 15px;
   padding: 0;
 }
+
+mat-card {
+  background-color: transparent !important;
+  backdrop-filter: blur(50px);
+
+  padding: 15px !important;
+  border-radius: 0px !important;
+}

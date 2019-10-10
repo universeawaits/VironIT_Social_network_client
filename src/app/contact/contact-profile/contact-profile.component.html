@@ -1,5 +1,10 @@
-<mat-card class="contact-card mat-elevation-z14" [class.profile-card-edit-mode]="mode == 'edit'">
-    <div class="contact-card-header">{{contact.user.name}}</div>
+<mat-card class="contact-card mat-elevation-z14">
+    <div class="contact-card-header">
+        {{viewName()}}
+        <button mat-icon-button disableRipple (click)="editPseudo(contact.user.email)" class="inline-icon">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
 
     <img src="{{contact.user.avatarSrc}}" class="contact-card-avatar mat-elevation-z7">
 
@@ -10,11 +15,17 @@
         {{contact.user.phone}}
     </div>
 
-    <div class="contact-card-footer">Registered {{contact.user.registered}}</div>
+    <div class="contact-card-footer">last seen {{contact.lastSeen}}</div>
     
     <div class="contact-card-actions">
-        <button mat-icon-button (click)="changeMode()">
-            <mat-icon>{{changeModeIcon}}</mat-icon>
+        <button *ngIf="contact.isContact" mat-icon-button disableRipple (click)="add(contact.user.email)">
+            <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button disableRipple (click)="block(contact.user.email)">
+            <mat-icon>block</mat-icon>
+        </button>
+        <button mat-icon-button disableRipple (click)="share(contact.user.email)">
+            <mat-icon>share</mat-icon>
         </button>
     </div>
 </mat-card>

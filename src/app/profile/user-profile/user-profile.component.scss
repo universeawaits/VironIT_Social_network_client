@@ -1,9 +1,6 @@
 $avatar-width: 250px;
 
 .profile-card {
-    background: transparent;
-    backdrop-filter: blur(50px);
-
     width: $avatar-width + 50px;
     border-radius: 0px;
     height: $avatar-width * 2 - 20px;

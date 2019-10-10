@@ -9,7 +9,25 @@ $online: $success;
     border-radius: 0px;
 
     padding: 10px;
-    height: inherit;
+    height: 250px * 2 - 20px;
+
+    scroll-behavior: smooth;
+    overflow: auto;
+}
+
+.contact-list::-webkit-scrollbar-track {
+	border-radius: 0;
+	background-color: transparent;
+}
+
+.contact-list::-webkit-scrollbar {
+	width: 3px;
+	background-color: transparent;
+}
+
+.contact-list::-webkit-scrollbar-thumb {
+	border-radius: 0;
+    background-color: rgba(#e4e4e4, 0.2);
 }
 
 .contact-avatar {

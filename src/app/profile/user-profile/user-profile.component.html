@@ -39,7 +39,7 @@
         {{user.phone}}
     </div>
 
-    <div *ngIf="mode == 'view'" class="profile-card-footer">Registered {{user.registered}}</div>
+    <div *ngIf="mode == 'view'" class="profile-card-footer">registered {{user.registered}}</div>
     
     <div class="profile-card-actions">
         <button *ngIf="mode == 'edit'" type="reset"  mat-icon-button (click)="cancelEdit()">

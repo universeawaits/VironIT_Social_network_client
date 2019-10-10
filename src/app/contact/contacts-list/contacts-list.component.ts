@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Contact } from 'src/app/model/contact';
+import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
+import { UserProfile } from 'src/app/model/user.profile';
 
 @Component({
   selector: 'contacts-list',
@@ -39,9 +41,16 @@ export class ContactsListComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private contactListProfileBindingService: ContactListProfileBindingService) { }
 
   ngOnInit() {
   }
 
+  selectContact(contact: Contact) {
+    this.contactListProfileBindingService.updateContact(contact);
+  }
+
+  viewName(contact: Contact) {
+    return contact.pseudonym ? contact.pseudonym : contact.user.name;
+  }
 }
