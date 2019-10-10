@@ -1,15 +1,30 @@
-$avatar-width: 250px;
+$avatar-width: 200px;
 
-.contac-card {
-    width: $avatar-width + 50px;
-    height: $avatar-width * 2 - 20px;
+.contact-card {
+    height: 450px;
+    width: 300px;
+    transition: all 0.2s ease-in;
+}
 
+* {
+    text-align: center;
+}
+
+.contact-card-blocked > .contact-card-avatar, .contact-card-blocked > .contact-card-content {
+    filter: blur(5px);
+    transition: all 0.2s ease-in;
+}
+
+.null-contact {
+    height: inherit;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
 
-    transition: all 0.2s ease-in;
+.hidden {
+    opacity: 0;
+    width: 0;
 }
 
 .contact-card-header {
@@ -20,7 +35,6 @@ $avatar-width: 250px;
     text-shadow: 0 0 3px #e4e4e4;
     font-size: 24px;
     transition: all 0.2s ease-in;
-    text-align: center;
 }
 
 .contact-card-avatar {
@@ -40,20 +54,16 @@ $avatar-width: 250px;
 
     margin:  0 15px 15px 15px;
     transition: all 0.2s ease-in;
-    text-align: center;
 }
 
 .contact-card-footer {
     margin: 0;
     transition: all 0.2s ease-in;
-    text-align: center;
 }
 
 .contact-card-actions {
     padding: 5px;
     margin: 10px;
-
-    text-align: center;
 }
 
 mat-card {

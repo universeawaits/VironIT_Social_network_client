@@ -1,31 +1,47 @@
 <mat-card class="contact-card mat-elevation-z14">
-    <div class="contact-card-header">
-        {{viewName()}}
-        <button mat-icon-button disableRipple (click)="editPseudo(contact.user.email)" class="inline-icon">
-            <mat-icon>edit</mat-icon>
-        </button>
+    <div *ngIf="!contact" class="null-contact">select a contact to view info</div>
+
+    <div *ngIf="contact" [class.contact-card-blocked]="contact.isBlocked"> <!---->
+        <div class="contact-card-header">
+            {{viewName()}}
+            <button mat-icon-button
+                disableRipple
+                (click)="editPseudo(contact.user.email)"
+                class="inline-icon"
+                [class.hidden]="contact.isBlocked"
+                [disabled]="contact.isBlocked">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+
+        <img src="{{contact.user.avatarSrc}}" class="contact-card-avatar mat-elevation-z7">
+
+        <div class="contact-card-content">
+            <br>
+            {{contact.user.email}}
+            <br>
+            {{contact.user.phone}}
+        </div>
+
+        <div class="contact-card-footer">last seen {{contact.lastSeen}}</div>
+        
+        <div class="contact-card-actions">
+            <button *ngIf="!contact.isContact && !contact.isBlocked" mat-icon-button disableRipple (click)="changeIsContactStatus()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button *ngIf="contact.isContact" mat-icon-button disableRipple (click)="changeIsContactStatus()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <button *ngIf="contact.isBlocked" mat-icon-button disableRipple (click)="changeIsBlockedStatus()">
+                <mat-icon>undo</mat-icon>
+            </button>
+            <button *ngIf="!contact.isBlocked" mat-icon-button disableRipple (click)="changeIsBlockedStatus()">
+                <mat-icon>block</mat-icon>
+            </button>
+            <button mat-icon-button disableRipple (click)="share(contact.user.email)">
+                <mat-icon>share</mat-icon>
+            </button>
+        </div>
     </div>
-
-    <img src="{{contact.user.avatarSrc}}" class="contact-card-avatar mat-elevation-z7">
-
-    <div class="contact-card-content">
-        <br>
-        {{contact.user.email}}
-        <br>
-        {{contact.user.phone}}
-    </div>
-
-    <div class="contact-card-footer">last seen {{contact.lastSeen}}</div>
     
-    <div class="contact-card-actions">
-        <button *ngIf="contact.isContact" mat-icon-button disableRipple (click)="add(contact.user.email)">
-            <mat-icon>add</mat-icon>
-        </button>
-        <button mat-icon-button disableRipple (click)="block(contact.user.email)">
-            <mat-icon>block</mat-icon>
-        </button>
-        <button mat-icon-button disableRipple (click)="share(contact.user.email)">
-            <mat-icon>share</mat-icon>
-        </button>
-    </div>
 </mat-card>

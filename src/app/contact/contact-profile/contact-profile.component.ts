@@ -3,6 +3,7 @@ import { Contact } from 'src/app/model/contact';
 import { UserProfile } from 'src/app/model/user.profile';
 import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
 import { Observable, Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 declare interface Action {
   icon: string;
@@ -16,7 +17,7 @@ declare interface Action {
 })
 export class ContactProfileComponent implements OnInit {
   private contactSubscription: Subscription;
-  public contact: Contact = new Contact();
+  public contact: Contact;
 
   private actions: Action[] = [
     { icon: 'block', action: 'block' },
@@ -24,38 +25,34 @@ export class ContactProfileComponent implements OnInit {
     { icon: 'share', action: 'share' }
   ];
 
-  constructor(private contactListProfileBindingService: ContactListProfileBindingService) {
+  constructor(
+    private contactListProfileBindingService: ContactListProfileBindingService,
+    private snackBar: MatSnackBar) {
     this.contactSubscription = this.contactListProfileBindingService.getContact()
       .subscribe(contact => this.contact = contact)
    }
 
-  ngOnInit() {
-    this.contact.user = new UserProfile();
-    this.contact.user.name = "Pasha";
-    this.contact.user.email = "loh.pidar@roar.by";
-    this.contact.user.phone = "+123 (24) 44 55 375";
-    this.contact.user.registered = "4 Apr '14";
-    this.contact.user.avatarSrc = 'assets/avatars/contacts/contact.jpg';
-    this.contact.isBlocked = false;
-    this.contact.isOnline = true;
-    this.contact.isContact = true;
-    this.contact.lastSeen = "now";
+  ngOnInit() { }
+
+  changeIsBlockedStatus() {
+    this.contact.isBlocked = !this.contact.isBlocked;
+    if (this.contact.isBlocked) {
+      this.contact.isContact = false;      
+    }
+    this.openSnackBar(this.contact.isBlocked ? 'contact blocked' : 'contact unblocked', 4);
   }
 
-  block(email: string) {
+  share() {
 
   }
 
-  share(email: string) {
+  editPseudonym(newPseudo: string) {
 
   }
 
-  editPseudonym(email: string, newPseudo: string) {
-
-  }
-
-  add(email: string) {
-
+  changeIsContactStatus() {
+    this.contact.isContact = !this.contact.isContact;
+    this.openSnackBar(this.contact.isContact ? 'contact added' : 'contact removed', 4);
   }
 
   viewName() {
@@ -64,5 +61,14 @@ export class ContactProfileComponent implements OnInit {
 
   ngOnDestroy() {
     this.contactSubscription.unsubscribe();
+  }
+
+  openSnackBar(message: string, duration: number) {
+    this.snackBar.open(message, 'ok', {
+      duration: duration * 1000,
+      panelClass: [ 'snack-success' ],
+      horizontalPosition: "right",
+      verticalPosition: "bottom"
+    });
   }
 }

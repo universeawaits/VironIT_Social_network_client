@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
 
   private editForm: FormGroup;
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.user.name = 'Tommy';
@@ -69,7 +69,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   openSnackBar(message: string, duration: number) {
-    this._snackBar.open(message, 'ok', {
+    this.snackBar.open(message, 'ok', {
       duration: duration * 1000,
       panelClass: [ 'snack-success' ],
       horizontalPosition: "right",
