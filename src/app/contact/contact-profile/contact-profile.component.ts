@@ -1,14 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Contact } from 'src/app/model/contact';
-import { UserProfile } from 'src/app/model/user.profile';
 import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-declare interface Action {
-  icon: string;
-  action: string;
-}
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { UserProfile } from 'src/app/model/user.profile';
 
 @Component({
   selector: 'contact-profile',
@@ -19,34 +15,77 @@ export class ContactProfileComponent implements OnInit {
   private contactSubscription: Subscription;
   public contact: Contact;
 
-  private actions: Action[] = [
-    { icon: 'block', action: 'block' },
-    { icon: 'edit', action: 'editPseudonym' },
-    { icon: 'share', action: 'share' }
-  ];
+  private mode: string = 'view';
+  private changeModeIcon: string = 'edit';
+
+  private editForm: FormGroup;
 
   constructor(
     private contactListProfileBindingService: ContactListProfileBindingService,
-    private snackBar: MatSnackBar) {
-    this.contactSubscription = this.contactListProfileBindingService.getContact()
-      .subscribe(contact => this.contact = contact)
+    private snackBar: MatSnackBar) {    
+      this.contactSubscription = this.contactListProfileBindingService.getContact()
+        .subscribe(
+          contact => {
+            this.contact = contact;
+            this.editForm.get('pseudonym').setValue(this.contact.pseudonym); // needed?
+            if (this.mode == 'edit') {
+              this.cancelEdit();
+            }
+        });
    }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.contact = new Contact();
+    this.contact.user = new UserProfile();
+
+    this.editForm = new FormGroup({
+      pseudonym: new FormControl(this.contact.pseudonym ? this.contact.pseudonym : this.contact.user.name, [ 
+        Validators.pattern("^[a-zA-Z]+$"), 
+        Validators.maxLength(20),
+        Validators.minLength(3) ]),
+    });
+    this.editForm.get('pseudonym').markAsUntouched();
+
+    this.contact = null;
+   }
 
   changeIsBlockedStatus() {
     this.contact.isBlocked = !this.contact.isBlocked;
     if (this.contact.isBlocked) {
       this.contact.isContact = false;      
     }
-    this.openSnackBar(this.contact.isBlocked ? 'contact blocked' : 'contact unblocked', 4);
+    this.openSnackBar(this.contact.isBlocked ? 'contact blocked' : 'contact unblocked', 3);
+  }
+
+  changeMode() {
+    if (this.mode == 'edit') { // unnec?
+      this.editPseudonym();
+      this.openSnackBar("changes saved", 3);
+    }
+    this.mode = (this.mode === 'view') ? 'edit' : 'view';
+    this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
+  }
+
+  cancelEdit() {
+    this.mode = (this.mode === 'view') ? 'edit' : 'view';
+    this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
+
+    this.editForm.get('pseudonym').setValue(this.contact.pseudonym);
+    this.openSnackBar("changes discarded", 3);
+  }
+
+  clearControl(controlName: string) {
+    this.editForm.get(controlName).setValue('');
+  }
+
+  editPseudonym() {
+    var pseudonymControl = this.editForm.get('pseudonym');
+    if (pseudonymControl.valid) {
+      this.contact.pseudonym = pseudonymControl.value;
+    }
   }
 
   share() {
-
-  }
-
-  editPseudonym(newPseudo: string) {
 
   }
 

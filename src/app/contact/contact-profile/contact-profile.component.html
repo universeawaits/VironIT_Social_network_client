@@ -1,20 +1,44 @@
 <mat-card class="contact-card mat-elevation-z14">
     <div *ngIf="!contact" class="null-contact">select a contact to view info</div>
 
-    <div *ngIf="contact" [class.contact-card-blocked]="contact.isBlocked"> <!---->
+    <div *ngIf="contact" [class.contact-card-blocked]="contact.isBlocked">
         <div class="contact-card-header">
-            {{viewName()}}
-            <button mat-icon-button
+            <span *ngIf="mode == 'edit'">
+                <form [formGroup]="editForm">
+                    <mat-form-field>
+                        <input matInput formControlName="pseudonym" type="text" placeholder="pseudonym" value="{{contact.pseudonym}}">
+                        <button mat-button matSuffix mat-icon-button (click)="clearControl('pseudonym')">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        <!-- Causes TypeError for errors are null wtf
+                        <mat-error *ngIf="editForm.get('pseudonym').errors?.pattern">alphabet characters only</mat-error>
+                        <mat-error *ngIf="editForm.get('pseudonym').errors?.minlength || editForm.get('name').errors?.maxlength">count between 3 and 20</mat-error> -->
+                    </mat-form-field>
+                </form>
+                <button mat-icon-button
+                    disableRipple
+                    (click)="cancelEdit()">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <button mat-icon-button
+                    type="reset"
+                    disableRipple
+                    (click)="changeMode()"
+                    [disabled]="editForm.invalid">
+                    <mat-icon>{{changeModeIcon}}</mat-icon>
+                </button>
+            </span>
+            <span *ngIf="mode == 'view'">
+                {{viewName()}}
+            </span>            
+            <button *ngIf="mode == 'view'" mat-icon-button
                 disableRipple
-                (click)="editPseudo(contact.user.email)"
-                class="inline-icon"
-                [class.hidden]="contact.isBlocked"
-                [disabled]="contact.isBlocked">
-                <mat-icon>edit</mat-icon>
+                (click)="changeMode()">
+                <mat-icon>{{changeModeIcon}}</mat-icon>
             </button>
         </div>
 
-        <img src="{{contact.user.avatarSrc}}" class="contact-card-avatar mat-elevation-z7">
+        <img draggable="false" src="{{contact.user.avatarSrc}}" class="contact-card-avatar mat-elevation-z7">
 
         <div class="contact-card-content">
             <br>
@@ -23,9 +47,9 @@
             {{contact.user.phone}}
         </div>
 
-        <div class="contact-card-footer">last seen {{contact.lastSeen}}</div>
+        <div *ngIf="mode == 'view'" class="contact-card-footer">last seen {{contact.lastSeen}}</div>
         
-        <div class="contact-card-actions">
+        <div *ngIf="mode == 'view'" class="contact-card-actions">
             <button *ngIf="!contact.isContact && !contact.isBlocked" mat-icon-button disableRipple (click)="changeIsContactStatus()">
                 <mat-icon>add</mat-icon>
             </button>

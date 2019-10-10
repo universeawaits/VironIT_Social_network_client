@@ -292,6 +292,7 @@ body {
 
 [mat-icon-button][disabled] {
   filter: blur(2px);
+  color: $dark-text;
 }
 
 [mat-icon-button]:not([disabled]):hover {

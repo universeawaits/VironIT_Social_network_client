@@ -29,7 +29,11 @@ export class UserProfileComponent implements OnInit {
 
     this.password = '12345'; // get its value from the server
     this.editForm = new FormGroup({
-      name: new FormControl(this.user.name, [ Validators.required, Validators.pattern("^[a-zA-Z]+$"), Validators.maxLength(20), Validators.minLength(3) ]),
+      name: new FormControl(this.user.name, [ 
+        Validators.required, 
+        Validators.pattern("^[a-zA-Z]+$"), 
+        Validators.maxLength(20), 
+        Validators.minLength(3) ]),
       password: new FormControl(this.password, [ Validators.required ])
     });
   }

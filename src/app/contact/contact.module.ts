@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContactsListComponent } from './contacts-list/contacts-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ContactComponent } from './contact/contact.component';
 import { ContactProfileComponent } from './contact-profile/contact-profile.component';
 
@@ -21,6 +22,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,

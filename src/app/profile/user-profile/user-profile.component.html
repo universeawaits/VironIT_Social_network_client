@@ -2,7 +2,7 @@
     <form [formGroup]="editForm">
         <div *ngIf="mode == 'view'" class="profile-card-header">{{user.name}}</div>
         <div *ngIf="mode == 'edit'">
-            <mat-form-field *ngIf="mode == 'edit'">
+            <mat-form-field>
                 <input matInput formControlName="name" type="text" placeholder="name" value="{{user.name}}">
                 <button mat-button matSuffix mat-icon-button (click)="clearControl('name')">
                     <mat-icon>close</mat-icon>
@@ -13,7 +13,7 @@
             </mat-form-field>
         </div>
     
-        <img src="{{user.avatarSrc}}"
+        <img draggable="false" src="{{user.avatarSrc}}"
             [matTooltipDisabled]="mode == 'view'"
             matTooltip="change avatar"
             [matTooltipPosition]="'right'"
@@ -42,7 +42,7 @@
     <div *ngIf="mode == 'view'" class="profile-card-footer">registered {{user.registered}}</div>
     
     <div class="profile-card-actions">
-        <button *ngIf="mode == 'edit'" type="reset"  mat-icon-button (click)="cancelEdit()">
+        <button *ngIf="mode == 'edit'" type="reset" mat-icon-button (click)="cancelEdit()">
             <mat-icon>close</mat-icon>
         </button>
         <button mat-icon-button type="reset" [disabled]="editForm.invalid" (click)="changeMode()">

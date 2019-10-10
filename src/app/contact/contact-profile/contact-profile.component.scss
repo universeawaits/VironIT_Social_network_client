@@ -13,6 +13,9 @@ $avatar-width: 200px;
 .contact-card-blocked > .contact-card-avatar, .contact-card-blocked > .contact-card-content {
     filter: blur(5px);
     transition: all 0.2s ease-in;
+
+    user-select: none;
+    cursor: default;
 }
 
 .null-contact {
@@ -68,4 +71,16 @@ $avatar-width: 200px;
 
 mat-card {
     padding: 10px;
+}
+
+mat-form-field {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+
+    width: $avatar-width;
+}
+
+[mat-icon-button][disabled] {
+    color: #e4e4e4  !important;
 }
