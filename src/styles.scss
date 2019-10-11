@@ -328,3 +328,20 @@ mat-form-field {
   
   font-size: 16px;
 }
+
+a {
+    color: $dark-text;
+    text-decoration: none;
+  
+    transition: all 0.2s ease-in;
+}
+
+a:hover {
+  text-shadow: 0 0 5px $dark-text;
+  
+  transition: all 0.2s ease-in;
+}
+
+div {
+  color: $dark-text;
+}

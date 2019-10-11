@@ -7,7 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './navigation/navigation.module';
 import { ProfileModule } from './profile/profile.module';
 import { ContactModule } from './contact/contact.module';
-import { RegisterModule } from './auth/register/register/register.module';
+import { RegisterModule } from './auth/register/register.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegisterModule } from './auth/register/register/register.module';
     NavigationModule,
     ProfileModule,
     ContactModule,
-    RegisterModule
+    RegisterModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

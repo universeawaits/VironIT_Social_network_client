@@ -1,0 +1,29 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div {
+    margin: 15px;
+}
+
+$container-width: 250px;
+
+.register-link-container {
+    width: $container-width;
+
+    padding: 10px 30px 10px 30px;
+
+    white-space: pre;
+    text-shadow: 0 0 3px #616161af;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    transition: all 0.2s ease-in;
+}
+
