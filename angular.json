@@ -124,6 +124,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "vironit-social-network"
 }

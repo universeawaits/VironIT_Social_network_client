@@ -1,0 +1,21 @@
+$container-width: 250px;
+
+.user-register-container {
+    width: $container-width;
+    height: 360px;
+
+    padding: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    backdrop-filter: blur(50px);
+}
+
+mat-form-field {
+    width: $container-width;
+    padding: 0;
+    margin: 10px;
+}

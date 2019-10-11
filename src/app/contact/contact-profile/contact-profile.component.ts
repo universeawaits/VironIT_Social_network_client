@@ -40,8 +40,7 @@ export class ContactProfileComponent implements OnInit {
 
     this.editForm = new FormGroup({
       pseudonym: new FormControl(this.contact.pseudonym ? this.contact.pseudonym : this.contact.user.name, [ 
-        Validators.pattern("^[a-zA-Z]+$"), 
-        Validators.maxLength(20),
+        Validators.pattern("^[a-zA-Z]+$"),
         Validators.minLength(3) ]),
     });
     this.editForm.get('pseudonym').markAsUntouched();

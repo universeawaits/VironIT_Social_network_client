@@ -1,0 +1,41 @@
+<div class="user-register-container mat-elevation-z14">
+    <form [formGroup]="registerForm">
+        <mat-form-field hintLabel="count between 3 and 20">
+            <input matInput maxlength="20" formControlName="name" type="text" placeholder="name">
+            <button mat-button matSuffix mat-icon-button (click)="clearControl('name')">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="registerForm.get('name').errors?.required">required</mat-error>
+            <mat-error *ngIf="registerForm.get('name').errors?.pattern">alphabet characters only</mat-error>
+            <mat-error *ngIf="registerForm.get('name').errors?.minlength">count between 3 and 20</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="email" type="text" placeholder="email">
+            <button mat-button matSuffix mat-icon-button (click)="clearControl('email')">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="registerForm.get('email').errors?.email">follow email pattern</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput maxlength="12" formControlName="phone" type="text" placeholder="phone">
+            <button mat-button matSuffix mat-icon-button (click)="clearControl('phone')">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="registerForm.get('phone').errors?.required">required</mat-error>
+            <mat-error *ngIf="registerForm.get('phone').errors?.pattern">digit characters only</mat-error>
+            <mat-error *ngIf="registerForm.get('phone').errors?.minlength || registerForm.get('phone').errors?.maxlength">count must be 12</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput #password formControlName="password" type="password" placeholder="password">
+            <button mat-button matSuffix mat-icon-button (click)="changePasswordFieldType()">
+                <mat-icon>remove_red_eye</mat-icon>
+            </button>
+        </mat-form-field>
+        <button mat-icon-button mat-button disableRipple [routerLink]="['/profile']">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button type="submit" mat-icon-button disableRipple [disabled]="registerForm.invalid" (click)="submit()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

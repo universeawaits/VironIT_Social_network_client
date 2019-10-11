@@ -1,12 +1,12 @@
 $avatar-width: 200px;
 
 .contact-card {
-    height: 450px;
+    height: 430px;
     width: 300px;
     transition: all 0.2s ease-in;
 }
 
-* {
+*:not(mat-form-field) {
     text-align: center;
 }
 
@@ -76,11 +76,10 @@ mat-card {
 mat-form-field {
     margin: 0;
     padding: 0;
-    font-size: 16px;
 
     width: $avatar-width;
 }
 
-[mat-icon-button][disabled] {
-    color: #e4e4e4  !important;
+input {
+    text-align: left;
 }

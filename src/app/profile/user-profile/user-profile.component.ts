@@ -31,8 +31,7 @@ export class UserProfileComponent implements OnInit {
     this.editForm = new FormGroup({
       name: new FormControl(this.user.name, [ 
         Validators.required, 
-        Validators.pattern("^[a-zA-Z]+$"), 
-        Validators.maxLength(20), 
+        Validators.pattern("^[a-zA-Z]+$"),
         Validators.minLength(3) ]),
       password: new FormControl(this.password, [ Validators.required ])
     });

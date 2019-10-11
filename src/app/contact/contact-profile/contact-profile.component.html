@@ -2,32 +2,32 @@
     <div *ngIf="!contact" class="null-contact">select a contact to view info</div>
 
     <div *ngIf="contact" [class.contact-card-blocked]="contact.isBlocked">
+        <span *ngIf="mode == 'edit'">
+            <form [formGroup]="editForm">
+                <mat-form-field  maxlength="20" hintLabel="count between 3 and 20">
+                    <input matInput formControlName="pseudonym" type="text" placeholder="pseudonym" value="{{contact.pseudonym}}">
+                    <button mat-button matSuffix mat-icon-button (click)="clearControl('pseudonym')">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error *ngIf="editForm.get('pseudonym').errors?.pattern">alphabet characters only</mat-error>
+                    <mat-error *ngIf="editForm.get('pseudonym').errors?.minlength">count between 3 and 20</mat-error>
+                </mat-form-field>
+            </form>
+            <button mat-icon-button
+                disableRipple
+                (click)="cancelEdit()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <button mat-icon-button
+                type="reset"
+                disableRipple
+                (click)="changeMode()"
+                [disabled]="editForm.invalid">
+                <mat-icon>{{changeModeIcon}}</mat-icon>
+            </button>
+        </span>
+
         <div class="contact-card-header">
-            <span *ngIf="mode == 'edit'">
-                <form [formGroup]="editForm">
-                    <mat-form-field>
-                        <input matInput formControlName="pseudonym" type="text" placeholder="pseudonym" value="{{contact.pseudonym}}">
-                        <button mat-button matSuffix mat-icon-button (click)="clearControl('pseudonym')">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                        <!-- Causes TypeError for errors are null wtf
-                        <mat-error *ngIf="editForm.get('pseudonym').errors?.pattern">alphabet characters only</mat-error>
-                        <mat-error *ngIf="editForm.get('pseudonym').errors?.minlength || editForm.get('name').errors?.maxlength">count between 3 and 20</mat-error> -->
-                    </mat-form-field>
-                </form>
-                <button mat-icon-button
-                    disableRipple
-                    (click)="cancelEdit()">
-                    <mat-icon>close</mat-icon>
-                </button>
-                <button mat-icon-button
-                    type="reset"
-                    disableRipple
-                    (click)="changeMode()"
-                    [disabled]="editForm.invalid">
-                    <mat-icon>{{changeModeIcon}}</mat-icon>
-                </button>
-            </span>
             <span *ngIf="mode == 'view'">
                 {{viewName()}}
             </span>            

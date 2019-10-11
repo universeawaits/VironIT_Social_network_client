@@ -2,14 +2,14 @@
     <form [formGroup]="editForm">
         <div *ngIf="mode == 'view'" class="profile-card-header">{{user.name}}</div>
         <div *ngIf="mode == 'edit'">
-            <mat-form-field>
-                <input matInput formControlName="name" type="text" placeholder="name" value="{{user.name}}">
+            <mat-form-field hintLabel="count between 3 and 20">
+                <input matInput maxlength="20" formControlName="name" type="text" placeholder="name" value="{{user.name}}">
                 <button mat-button matSuffix mat-icon-button (click)="clearControl('name')">
                     <mat-icon>close</mat-icon>
                 </button>
                 <mat-error *ngIf="editForm.get('name').errors?.required">required</mat-error>
                 <mat-error *ngIf="editForm.get('name').errors?.pattern">alphabet characters only</mat-error>
-                <mat-error *ngIf="editForm.get('name').errors?.minlength || editForm.get('name').errors?.maxlength">count between 3 and 20</mat-error>
+                <mat-error *ngIf="editForm.get('name').errors?.minlength">count between 3 and 20</mat-error>
             </mat-form-field>
         </div>
     

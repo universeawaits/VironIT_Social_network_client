@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './navigation/navigation.module';
 import { ProfileModule } from './profile/profile.module';
 import { ContactModule } from './contact/contact.module';
+import { RegisterModule } from './auth/register/register/register.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ContactModule } from './contact/contact.module';
     BrowserAnimationsModule,
     NavigationModule,
     ProfileModule,
-    ContactModule
+    ContactModule,
+    RegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

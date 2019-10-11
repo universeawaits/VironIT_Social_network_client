@@ -3,4 +3,12 @@
   backdrop-filter: blur(50px);
   
   height: 64px;
+
+  transition: all 0.2s linear;
+}
+
+.disabled {
+  height: 0px;
+  overflow: hidden;
+  transition: all 0.2s linear;
 }

@@ -292,7 +292,7 @@ body {
 
 [mat-icon-button][disabled] {
   filter: blur(2px);
-  color: $dark-text;
+  color: $dark-text !important;
 }
 
 [mat-icon-button]:not([disabled]):hover {
@@ -302,7 +302,6 @@ body {
 
 mat-error {
   font-size: 12px;
-  letter-spacing: 0.05em;
   
   text-shadow: 0 0 5px $dark-text;
 }
@@ -318,4 +317,14 @@ mat-card {
 
   padding: 15px !important;
   border-radius: 0px !important;
+}
+
+mat-icon {
+  color: $dark-text;
+}
+
+mat-form-field {
+  color: $dark-text;
+  
+  font-size: 16px;
 }

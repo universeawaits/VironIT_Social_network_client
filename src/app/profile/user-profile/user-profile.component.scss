@@ -3,7 +3,7 @@ $avatar-width: 250px;
 .profile-card {
     width: $avatar-width + 50px;
     border-radius: 0px;
-    height: $avatar-width * 2 - 20px;
+    height: $avatar-width * 2;
 
     display: flex;
     flex-direction: column;
@@ -11,13 +11,13 @@ $avatar-width: 250px;
     justify-content: center;
     text-align: center;
 
-    transition: all 0.2s ease-in;
+    transition: all 0.5s linear;
 }
 
 .profile-card-edit-mode {
-    height: $avatar-width * 2;
+    height: $avatar-width * 2 + 20px;
 
-    transition: all 0.2s ease-in;
+    transition: all 0.5s linear;
 }
 
 .profile-card-header {
@@ -34,7 +34,7 @@ $avatar-width: 250px;
     padding: 1px;
     border: 4px solid rgba($color: #5e5e5e, $alpha: 0.2);
     border-radius: 50%;
-    margin: 0px 30px 0px 30px;
+    margin: 10px 30px 10px 30px;
 
     width: $avatar-width;
   
