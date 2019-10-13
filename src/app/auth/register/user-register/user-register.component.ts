@@ -60,6 +60,9 @@ export class UserRegisterComponent implements OnInit {
       () => {
         this.openSnackBar("check you email", 7);
         this.router.navigateByUrl('/login');
+      },
+      response => {
+        this.openSnackBar(response.error, 4);
       }
     );
   }
