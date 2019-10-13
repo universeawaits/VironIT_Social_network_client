@@ -4,8 +4,8 @@
     <div *ngIf="contact" [class.contact-card-blocked]="contact.isBlocked">
         <span *ngIf="mode == 'edit'">
             <form [formGroup]="editForm">
-                <mat-form-field  maxlength="20" hintLabel="count between 3 and 20">
-                    <input matInput formControlName="pseudonym" type="text" placeholder="pseudonym" value="{{contact.pseudonym}}">
+                <mat-form-field hintLabel="count between 3 and 20">
+                    <input matInput formControlName="pseudonym" type="text" maxlength="15" placeholder="pseudonym" value="{{contact.pseudonym}}">
                     <button mat-button matSuffix mat-icon-button (click)="clearControl('pseudonym')">
                         <mat-icon>close</mat-icon>
                     </button>

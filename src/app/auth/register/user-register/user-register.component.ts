@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/server/user.service';
 
 @Component({
   selector: 'user-register',
@@ -13,6 +14,7 @@ export class UserRegisterComponent implements OnInit {
   @ViewChild('password', { static: false }) passwordField: ElementRef;
 
   constructor(
+    private userService: UserService,
     private snackBar: MatSnackBar,
     private router: Router) { }
 
@@ -32,7 +34,8 @@ export class UserRegisterComponent implements OnInit {
         Validators.maxLength(12)
       ]),
       password: new FormControl(null, [
-        // add validators the same as on server
+        Validators.minLength(8),
+        Validators.maxLength(8)
       ])
     });
   }
@@ -48,10 +51,17 @@ export class UserRegisterComponent implements OnInit {
 
   submit() {
     // on server
-
-    //if succ
-    this.openSnackBar("check you email", 7);
-    this.router.navigateByUrl('/login');
+    this.userService.register({ 
+      Username: this.registerForm.get('name').value,
+      Email: this.registerForm.get('email').value,
+      Phone: this.registerForm.get('phone').value,
+      Password: this.registerForm.get('password').value
+    }).subscribe(
+      () => {
+        this.openSnackBar("check you email", 7);
+        this.router.navigateByUrl('/login');
+      }
+    );
   }
 
   openSnackBar(message: string, duration: number) {

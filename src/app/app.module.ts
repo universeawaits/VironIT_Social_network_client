@@ -9,6 +9,7 @@ import { ProfileModule } from './profile/profile.module';
 import { ContactModule } from './contact/contact.module';
 import { RegisterModule } from './auth/register/register.module';
 import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
     ProfileModule,
     ContactModule,
     RegisterModule,
-    AuthModule
+    AuthModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

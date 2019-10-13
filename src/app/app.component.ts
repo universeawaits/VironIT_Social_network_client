@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
       event => {
         if (event instanceof NavigationEnd) {
           this.route = this.router.url;
-          console.log(this.route)
         }
       }
     )
