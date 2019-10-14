@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   imports: [
     CommonModule,
-    MatCardModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
     MatIconModule,
     MatInputModule,
     MatRippleModule,

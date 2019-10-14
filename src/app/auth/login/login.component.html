@@ -6,7 +6,7 @@
         <mat-form-field>
             <input matInput formControlName="password" type="password" placeholder="password">
         </mat-form-field>
-        <button type="submit" mat-icon-button disableRipple (click)="submit()" [disabled]="loginForm.invalid">
+        <button type="button" mat-icon-button disableRipple (click)="submit()" [disabled]="loginForm.invalid">
             <mat-icon>fingerprint</mat-icon>
         </button>
     </form>

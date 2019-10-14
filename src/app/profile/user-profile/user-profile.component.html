@@ -1,9 +1,9 @@
 <mat-card class="profile-card mat-elevation-z14" [class.profile-card-edit-mode]="mode == 'edit'">
     <form [formGroup]="editForm">
-        <div *ngIf="mode == 'view'" class="profile-card-header">{{user.name}}</div>
+        <div *ngIf="mode == 'view'" class="profile-card-header">{{ user.name }}</div>
         <div *ngIf="mode == 'edit'">
             <mat-form-field hintLabel="count between 3 and 20">
-                <input matInput maxlength="20" formControlName="name" type="text" placeholder="name" value="{{user.name}}">
+                <input matInput maxlength="20" formControlName="name" type="text" placeholder="name" value="{{ user.name }}">
                 <button mat-button matSuffix mat-icon-button (click)="clearControl('name')">
                     <mat-icon>close</mat-icon>
                 </button>
@@ -13,7 +13,7 @@
             </mat-form-field>
         </div>
     
-        <img draggable="false" src="{{user.avatarSrc}}"
+        <img draggable="false" src="{{ user.avatarSrc }}"
             [matTooltipDisabled]="mode == 'view'"
             matTooltip="change avatar"
             [matTooltipPosition]="'right'"
@@ -34,19 +34,22 @@
 
     <div *ngIf="mode == 'view'" class="profile-card-content">
         <br>
-        {{user.email}}
+        {{ user.email }}
         <br>
-        {{user.phone}}
+        {{ user.phone }}
     </div>
 
-    <div *ngIf="mode == 'view'" class="profile-card-footer">registered {{user.registered}}</div>
+    <div *ngIf="mode == 'view'" class="profile-card-footer">registered {{ user.registered | date }}</div>
     
     <div class="profile-card-actions">
         <button *ngIf="mode == 'edit'" type="reset" mat-icon-button (click)="cancelEdit()">
             <mat-icon>close</mat-icon>
         </button>
         <button mat-icon-button type="reset" [disabled]="editForm.invalid" (click)="changeMode()">
-            <mat-icon>{{changeModeIcon}}</mat-icon>
+            <mat-icon>{{ changeModeIcon }}</mat-icon>
+        </button>
+        <button *ngIf="mode == 'view'" mat-icon-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
         </button>
     </div>
 </mat-card>

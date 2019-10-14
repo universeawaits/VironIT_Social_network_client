@@ -62,7 +62,7 @@ export class UserRegisterComponent implements OnInit {
         this.router.navigateByUrl('/login');
       },
       response => {
-        this.openSnackBar(response.error, 4);
+        this.openSnackBar(response.error, 5);
       }
     );
   }

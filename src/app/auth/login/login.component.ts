@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/server/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'login',
@@ -11,7 +13,9 @@ export class LoginComponent implements OnInit {
   private loginForm: FormGroup;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -22,9 +26,29 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    // on server
+    this.authService.login(
+      this.loginForm.get('login').value, 
+      this.loginForm.get('password').value
+      ).subscribe(
+        response =>
+        {
+          localStorage.setItem("jwt:token", response.token),
+          localStorage.setItem("jwt:email", response.email)
+          this.router.navigateByUrl('/profile');
+        },
+        response => 
+        {
+          this.openSnackBar(response.error, 5);
+        }
+      )
+  }
 
-    //if succ
-    this.router.navigateByUrl('/profile');
+  openSnackBar(message: string, duration: number) {
+    this.snackBar.open(message, 'ok', {
+      duration: duration * 1000,
+      panelClass: [ 'snack-success' ],
+      horizontalPosition: "right",
+      verticalPosition: "bottom"
+    });
   }
 }

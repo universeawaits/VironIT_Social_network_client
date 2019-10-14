@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserProfile } from 'src/app/model/user.profile';
 import { FormGroup, FormControl, Validators, AbstractControl, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/server/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-profile',
@@ -14,27 +16,41 @@ export class UserProfileComponent implements OnInit {
 
   private avatarsFolderSrc = 'assets/avatars/';
   private user: UserProfile = new UserProfile();
-  private password: string;
 
   private editForm: FormGroup;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {
-    this.user.name = 'Tommy';
-    this.user.email = 'tommdddddddddddddy.example@gmail.com';
-    this.user.phone = '+375 (33) 660 40 66';
-    this.user.registered = "19 Jun \'19";
-    this.user.avatarSrc = this.avatarsFolderSrc + this.user.email + '.jpg';
-
-    this.password = '12345'; // get its value from the server
     this.editForm = new FormGroup({
-      name: new FormControl(this.user.name, [ 
+      name: new FormControl('', [ 
         Validators.required, 
         Validators.pattern("^[a-zA-Z]+$"),
         Validators.minLength(3) ]),
-      password: new FormControl(this.password, [ Validators.required ])
+      password: new FormControl('')
     });
+
+    this.authService.getUserData().subscribe(
+      user => {
+        this.user = user;
+        this.user.avatarSrc = this.avatarsFolderSrc + 'tommdddddddddddddy.example@gmail.com' + '.jpg';
+
+        this.editForm.get('name').setValue(this.user.name);
+      }
+    );
+  }
+
+  logout() {
+    this.authService.logout().subscribe(
+      () => {
+        localStorage.removeItem("jwt:token");
+        this.router.navigateByUrl('login');
+      }
+    );
   }
 
   clearControl(controlName: string) {
@@ -48,7 +64,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     var passwordControl = this.editForm.get('password');
-    if (passwordControl.valid) {
+    if (passwordControl) {
       //for password just send request to the server and email user
     }
   }
@@ -58,7 +74,7 @@ export class UserProfileComponent implements OnInit {
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
 
     this.editForm.get('name').setValue(this.user.name);
-    this.editForm.get('password').setValue(this.password);
+    this.editForm.get('password').setValue(null);
     this.openSnackBar("changes discarded", 3);
   }
 
