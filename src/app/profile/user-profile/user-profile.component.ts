@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/server/auth.service';
 import { Router } from '@angular/router';
 import { ImageService, Image } from 'src/app/services/server/image.service';
+import { UserService } from 'src/app/services/server/user.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class UserProfileComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private authService: AuthService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private userService: UserService
     ) { }
 
   ngOnInit() {
@@ -34,14 +36,17 @@ export class UserProfileComponent implements OnInit {
       name: new FormControl('', [ 
         Validators.required, 
         Validators.pattern("^[a-zA-Z]+$"),
-        Validators.minLength(3) ]),
+        Validators.minLength(3) 
+      ]),
       password: new FormControl('')
     });
 
     this.authService.getUserData().subscribe(
       user => {
         this.user = user;
-        this.user.avatarSrc = this.avatarsSrc + this.user.email + '.jpg';
+        if (!this.user.avatarSrc) {
+          this.user.avatarSrc = 'assets/images/avatars/large/account.jpg'
+        }
 
         this.editForm.get('name').setValue(this.user.name);
       }
@@ -66,11 +71,14 @@ export class UserProfileComponent implements OnInit {
     if (nameControl.valid) {
       this.user.name = nameControl.value;
     }
-
+    
     var passwordControl = this.editForm.get('password');
-    if (passwordControl) {
-      //for password just send request to the server and email user
-    }
+
+    this.userService.updateData({ Name: nameControl.value, Password: passwordControl.value }).subscribe(
+      () => {
+        this.openSnackBar("changes saved", 3);
+      }
+    );
   }
 
   cancelEdit() {
@@ -85,7 +93,6 @@ export class UserProfileComponent implements OnInit {
   changeMode() {
     if (this.mode == 'edit') { // unnec?
       this.updateUser();
-      this.openSnackBar("changes saved", 3);
     }
     this.mode = (this.mode === 'view') ? 'edit' : 'view';
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
@@ -118,7 +125,7 @@ export class UserProfileComponent implements OnInit {
           this.openSnackBar(response.error, 4);
         },
         () => {
-          this.openSnackBar('reload to see new avatar', 4);
+          this.openSnackBar('wait a minute and reload to see new avatar', 4);
         })
     });
 

@@ -17,4 +17,11 @@ export class UserService {
     result = this.httpClient.post(this.usersUrl + '/register', user, { responseType: 'text' });
     return result;
   }
+
+  updateData(user: any) {
+    let result: Observable<any>;
+    result = this.httpClient.post(this.usersUrl + '/updateData', user,
+    { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token')} });
+    return result;
+  }
 }
