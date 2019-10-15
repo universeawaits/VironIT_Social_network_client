@@ -30,6 +30,11 @@ $avatar-width: 250px;
     transition: all 0.2s ease-in;
 }
 
+.profile-card-avatar-container {
+    position: relative;
+    transition: all 0.2s ease-in;
+}
+
 .profile-card-avatar {
     padding: 1px;
     border: 4px solid rgba($color: #5e5e5e, $alpha: 0.2);
@@ -39,6 +44,29 @@ $avatar-width: 250px;
     width: $avatar-width;
   
     transition: all 0.2s ease-in;
+}
+
+.avatar-img-edit-mode {
+    filter: blur(3px);
+    opacity: 0.2;
+    transition: all 0.2s ease-in;
+}
+
+.avatar-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    cursor: pointer;
+    background: none;
+    outline: none;
+}
+
+.avatar-button ::ng-deep  mat-icon {
+    width: $avatar-width / 5 !important;
+    height: $avatar-width / 5 !important;
+    font-size: $avatar-width / 5 !important;
 }
 
 .profile-card-content {

@@ -13,13 +13,20 @@
             </mat-form-field>
         </div>
     
-        <img draggable="false" src="{{ user.avatarSrc }}"
+        <div class="profile-card-avatar-container">
+            <img draggable="false" src="{{ user.avatarSrc }}"
             [matTooltipDisabled]="mode == 'view'"
             matTooltip="change avatar"
             [matTooltipPosition]="'right'"
             [matTooltipShowDelay]="500"
             matTooltipClass="tooltip mat-elevation-z8"
-            class="profile-card-avatar mat-elevation-z7">
+            class="profile-card-avatar mat-elevation-z7"
+            [class.avatar-img-edit-mode]="mode == 'edit'">
+        <button [hidden]="mode == 'view'" mat-icon-button type="button" (click)="fileInput.click()" class="avatar-button">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <input hidden #fileInput (change)="processFile(fileInput)" type="file">
+        </div>
 
         <div *ngIf="mode == 'edit'">
             <mat-form-field>

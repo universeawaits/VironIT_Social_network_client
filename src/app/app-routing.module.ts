@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
 import { ContactComponent } from './contact/contact/contact.component';
 import { UserRegisterComponent } from './auth/register/user-register/user-register.component';

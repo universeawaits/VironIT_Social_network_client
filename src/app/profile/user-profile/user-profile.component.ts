@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserProfile } from 'src/app/model/user.profile';
 import { FormGroup, FormControl, Validators, AbstractControl, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/server/auth.service';
 import { Router } from '@angular/router';
+import { ImageService, Image } from 'src/app/services/server/image.service';
+
 
 @Component({
   selector: 'user-profile',
@@ -14,15 +16,17 @@ export class UserProfileComponent implements OnInit {
   mode: string = 'view';
   changeModeIcon: string = 'edit';
 
-  private avatarsFolderSrc = 'assets/avatars/';
+  private avatarsSrc = 'https://localhost:44345/images/avatars/large/';
   private user: UserProfile = new UserProfile();
 
   private editForm: FormGroup;
+  private selectedFile: Image; 
 
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private imageService: ImageService
     ) { }
 
   ngOnInit() {
@@ -37,7 +41,7 @@ export class UserProfileComponent implements OnInit {
     this.authService.getUserData().subscribe(
       user => {
         this.user = user;
-        this.user.avatarSrc = this.avatarsFolderSrc + 'tommdddddddddddddy.example@gmail.com' + '.jpg';
+        this.user.avatarSrc = this.avatarsSrc + this.user.email + '.jpg';
 
         this.editForm.get('name').setValue(this.user.name);
       }
@@ -94,5 +98,30 @@ export class UserProfileComponent implements OnInit {
       horizontalPosition: "right",
       verticalPosition: "bottom"
     });
+  }
+
+  processFile(imageInput: any) {
+    if (this.mode == 'view') {
+      return;
+    }
+
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new Image(event.target.result, file);
+
+      this.imageService.uploadImage(this.selectedFile.file).subscribe(
+        () => { },
+        response => {
+          this.selectedFile.link = '';
+          this.openSnackBar(response.error, 4);
+        },
+        () => {
+          this.openSnackBar('reload to see new avatar', 4);
+        })
+    });
+
+    reader.readAsDataURL(file);
   }
 }
