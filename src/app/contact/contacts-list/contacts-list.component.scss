@@ -8,13 +8,17 @@ $online: $success;
     backdrop-filter: blur(50px);
     border-radius: 0px;
 
-    padding: 10px;
-    height: 440px;
+    padding: 2px 10px 10px 10px;
+    height: 470px;
 
     scroll-behavior: smooth;
     overflow: auto;
 
     min-width: 200px;
+    transition: all 0.2s ease-in;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-list::-webkit-scrollbar-track {
@@ -53,4 +57,13 @@ mat-list-item:hover {
     text-shadow: 0 0 3px #e4e4e4;
     
     transition: all 0.2s ease-in;
+}
+
+.no-search-results {
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      emailOrPhone: new FormControl(null, null),
+      emailOrPhone: new FormControl('', null),
     });
   }
 

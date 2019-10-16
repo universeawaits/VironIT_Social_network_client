@@ -18,7 +18,7 @@ export class ContactsListComponent implements OnInit {
   private allContacts: Contact[] = [
     {
       pseudonym: '', isOnline: true, isBlocked: false, isContact: true, lastSeen: '7 Oct \'19', 
-      user: { name: 'Anna', registered: '16 Jun \'19', phone: '375442356847', email: 'anna.doe@gmail.com', avatarSrc: this.contactsAvatarsSrc + '/contact.jpg'}
+      user: { name: 'Annaqqqqqqqqqqqqqqqq', registered: '16 Jun \'19', phone: '375442356847', email: 'anna.doe@gmail.com', avatarSrc: this.contactsAvatarsSrc + '/contact.jpg'}
     }, {
       pseudonym: '', isOnline: false, isBlocked: false, isContact: false, lastSeen: '4 Sep \'19', 
       user: { name: 'Andrew', registered: '21 Jul \'19', phone: '375252658999', email: 'loh.kek@gmail.ru', avatarSrc: this.contactsAvatarsSrc + '/contact.jpg'}
@@ -67,6 +67,7 @@ export class ContactsListComponent implements OnInit {
               this.contacts = this.allContacts.filter(contact => contact.isContact);
             }
         });
+        console.log(this.allContacts.length == 0)
   }
 
   selectContact(contact: Contact) {

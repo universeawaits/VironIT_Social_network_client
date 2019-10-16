@@ -4,11 +4,23 @@
   
   height: 64px;
 
+
   transition: all 0.2s linear;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .disabled {
   height: 0px;
   overflow: hidden;
   transition: all 0.2s linear;
+}
+
+span {
+  margin: 0 30px 0 30px;
 }

@@ -227,12 +227,9 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   $error: #ca4557;
 
   .mat-snack-bar-container {
-      color: $dark-text;
-      box-shadow: 0 0 8px rgba($color: $dark-text, $alpha: 0.2);
       background: transparent;
       backdrop-filter: blur(50px);
       font-family: 'Montserrat' !important;
-      font-size: 14px;
       border-radius: 0px !important;
   }
   //Added with panelClass property
@@ -309,6 +306,9 @@ mat-error {
 mat-form-field {
   margin: 15px;
   padding: 0;
+  color: $dark-text;
+  
+  font-size: 16px;
 }
 
 mat-card {
@@ -321,12 +321,6 @@ mat-card {
 
 mat-icon {
   color: $dark-text;
-}
-
-mat-form-field {
-  color: $dark-text;
-  
-  font-size: 16px;
 }
 
 a {

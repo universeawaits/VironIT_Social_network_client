@@ -1,9 +1,16 @@
 $avatar-width: 200px;
 
 .contact-card {
-    height: 430px;
+    height: 460px;
     width: 300px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
     transition: all 0.2s ease-in;
+    flex-grow: 1;
 }
 
 *:not(mat-form-field) {
@@ -23,6 +30,8 @@ $avatar-width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: all 0.2s ease-in;
 }
 
 .hidden {
@@ -70,7 +79,7 @@ $avatar-width: 200px;
 }
 
 mat-card {
-    padding: 10px;
+    padding: 10px 10px 12px 10px !important;
 }
 
 mat-form-field {
