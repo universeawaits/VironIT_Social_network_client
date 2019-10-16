@@ -13,12 +13,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     ContactsListComponent,
     ContactComponent,
-    ContactProfileComponent
+    ContactProfileComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

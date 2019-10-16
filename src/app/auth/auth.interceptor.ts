@@ -12,7 +12,6 @@ export class AuthInterceptor implements HttpInterceptor {
         if (req.headers.get('No-Auth') == "True") {
             return next.handle(req.clone());
         }
-        console.log(1)
  
         if (localStorage.getItem('jwt:token') != null) {
             const clonedreq = req.clone({

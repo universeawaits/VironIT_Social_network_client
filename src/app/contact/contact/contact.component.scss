@@ -1,7 +1,19 @@
-.contacts-container {
+$margin: 12px;
+
+.contact-container {
     display: flex;
+    flex-direction: column;
 }
 
-.contacts-container > * {
-    margin: 12px;
+.contacts-container {
+    display: flex;
+    margin: $margin / 2; 
+}
+
+.contacts-container * {
+    margin: $margin / 2;
+}
+
+.contact-container search {
+    margin: 0 $margin;
 }

@@ -1,0 +1,10 @@
+<div class="search-form-container mat-elevation-z14">
+    <form [formGroup]="searchForm">
+        <mat-form-field floatLabel="never">
+            <input matInput formControlName="emailOrPhone" type="text" placeholder="type to search">
+        </mat-form-field>
+        <button type="submit" disableRipple matSuffix mat-icon-button (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </form>
+</div>

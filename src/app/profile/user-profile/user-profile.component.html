@@ -30,7 +30,7 @@
 
         <div *ngIf="mode == 'edit'">
             <mat-form-field>
-                <input matInput formControlName="password" type="password" placeholder="password">
+                <input matInput maxlength="8" formControlName="password" type="password" placeholder="password">
                 <button mat-button matSuffix mat-icon-button aria-label="clear" (click)="clearControl('password')">
                     <mat-icon>close</mat-icon>
                 </button>

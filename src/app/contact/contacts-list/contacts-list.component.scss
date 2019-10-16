@@ -13,6 +13,8 @@ $online: $success;
 
     scroll-behavior: smooth;
     overflow: auto;
+
+    min-width: 200px;
 }
 
 .contact-list::-webkit-scrollbar-track {
