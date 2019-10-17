@@ -23,33 +23,33 @@
                 disableRipple
                 (click)="changeMode()"
                 [disabled]="editForm.invalid">
-                <mat-icon>{{changeModeIcon}}</mat-icon>
+                <mat-icon>{{ changeModeIcon }}</mat-icon>
             </button>
         </span>
 
         <div class="contact-card-header">
-            <span *ngIf="mode == 'view'">
-                {{viewName()}}
-            </span>            
-            <button *ngIf="mode == 'view'" mat-icon-button
+            <span *ngIf="mode == 'view' || mode == 'search'">
+                {{ viewName() }}
+            </span>
+            <button *ngIf="mode == 'view' && contact.isContact" mat-icon-button
                 disableRipple
                 (click)="changeMode()">
-                <mat-icon>{{changeModeIcon}}</mat-icon>
+                <mat-icon>{{ changeModeIcon }}</mat-icon>
             </button>
         </div>
 
-        <img draggable="false" src="{{contact.user.avatarSrc}}" class="contact-card-avatar mat-elevation-z7">
+        <img draggable="false" src="{{ contact.user.avatar }}" class="contact-card-avatar mat-elevation-z7">
 
         <div class="contact-card-content">
             <br>
-            {{contact.user.email}}
+            {{ contact.user.email }}
             <br>
-            {{contact.user.phone}}
+            {{ contact.user.phone }}
         </div>
 
-        <div *ngIf="mode == 'view'" class="contact-card-footer">last seen {{contact.lastSeen}}</div>
+        <div *ngIf="mode == 'view'" class="contact-card-footer">last seen {{ contact.lastSeen }}</div>
         
-        <div *ngIf="mode == 'view'" class="contact-card-actions">
+        <div *ngIf="mode == 'view' || mode == 'search'" class="contact-card-actions">
             <button *ngIf="!contact.isContact && !contact.isBlocked" mat-icon-button disableRipple (click)="changeIsContactStatus()">
                 <mat-icon>add</mat-icon>
             </button>
@@ -62,7 +62,7 @@
             <button *ngIf="!contact.isBlocked" mat-icon-button disableRipple (click)="changeIsBlockedStatus()">
                 <mat-icon>block</mat-icon>
             </button>
-            <button mat-icon-button disableRipple (click)="share(contact.user.email)">
+            <button *ngIf="contact.isContact" mat-icon-button disableRipple (click)="share(contact.user.email)">
                 <mat-icon>share</mat-icon>
             </button>
         </div>

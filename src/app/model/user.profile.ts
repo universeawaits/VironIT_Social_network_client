@@ -3,5 +3,5 @@ export class UserProfile {
     email: string;
     phone: string;
     registered: string;
-    avatarSrc: string;
+    avatar: string;
 }

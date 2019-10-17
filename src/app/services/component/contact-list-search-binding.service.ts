@@ -10,7 +10,7 @@ export class ContactListSearchBindingService {
 
   constructor() { }
 
-  getContacts(): Observable<string> {
+  getSearchString(): Observable<string> {
     return this.searchString.asObservable();
   }
 

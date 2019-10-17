@@ -30,7 +30,6 @@ export class ImageService {
     if (!localStorage.getItem('user:username')) {
       return this.httpClient.get<Image[]>(this.imagesUrl);
     }
-    console.log(this.imagesUrl + '/' + localStorage.getItem('user:username'))
     return this.httpClient.get<Image[]>(this.imagesUrl + '/' + localStorage.getItem('user:username'));
   }
 }

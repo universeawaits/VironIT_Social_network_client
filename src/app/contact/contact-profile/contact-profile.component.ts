@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserProfile } from 'src/app/model/user.profile';
+import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
+import { ContactService } from 'src/app/services/server/contact.service';
 
 @Component({
   selector: 'contact-profile',
@@ -13,6 +15,7 @@ import { UserProfile } from 'src/app/model/user.profile';
 })
 export class ContactProfileComponent implements OnInit {
   private contactSubscription: Subscription;
+  private searchModeSubscription: Subscription;
   public contact: Contact;
 
   private mode: string = 'view';
@@ -22,7 +25,10 @@ export class ContactProfileComponent implements OnInit {
 
   constructor(
     private contactListProfileBindingService: ContactListProfileBindingService,
-    private snackBar: MatSnackBar) {    
+    private contactListSearchBindingService: ContactListSearchBindingService,
+    private contactService: ContactService,
+    private snackBar: MatSnackBar
+    ) {    
       this.contactSubscription = this.contactListProfileBindingService.getContact()
         .subscribe(
           contact => {
@@ -32,6 +38,16 @@ export class ContactProfileComponent implements OnInit {
               this.cancelEdit();
             }
         });
+      this.searchModeSubscription = this.contactListSearchBindingService.getSearchString()
+        .subscribe(
+          searchString => {
+            if (searchString.trim()) {
+              this.mode = 'search';
+              this.contact = null;
+            } else {
+              this.mode = 'view';
+            }
+          });
    }
 
   ngOnInit() {
@@ -89,6 +105,14 @@ export class ContactProfileComponent implements OnInit {
   }
 
   changeIsContactStatus() {
+    if (this.contact.isContact) {
+      this.contactService.removeContact(this.contact.user.email);
+    } else {
+      this.contactService.addContact(this.contact.user.email).subscribe(() => {
+        
+      });
+    }
+
     this.contact.isContact = !this.contact.isContact;
     this.openSnackBar(this.contact.isContact ? 'contact added' : 'contact removed', 4);
   }

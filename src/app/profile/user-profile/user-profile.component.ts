@@ -17,6 +17,7 @@ export class UserProfileComponent implements OnInit {
   mode: string = 'view';
   changeModeIcon: string = 'edit';
 
+  private avatarSrc: string;
   private avatarsSrc = 'https://localhost:44345/images/avatars/large/';
   private user: UserProfile = new UserProfile();
 
@@ -38,16 +39,18 @@ export class UserProfileComponent implements OnInit {
         Validators.pattern("^[a-zA-Z]+$"),
         Validators.minLength(3) 
       ]),
-      password: new FormControl('')
+      password: new FormControl('', [
+        Validators.minLength(8),
+        Validators.maxLength(8)
+      ])
     });
 
     this.authService.getUserData().subscribe(
       user => {
         this.user = user;
-        if (!this.user.avatarSrc) {
-          this.user.avatarSrc = 'assets/images/avatars/large/account.jpg'
+        if (!this.user.avatar) {
+          this.user.avatar = 'assets/images/avatars/large/account.jpg'
         }
-
         this.editForm.get('name').setValue(this.user.name);
       }
     );
@@ -125,7 +128,7 @@ export class UserProfileComponent implements OnInit {
           this.openSnackBar(response.error, 4);
         },
         () => {
-          this.openSnackBar('wait a minute and reload to see new avatar', 4);
+          this.openSnackBar('reload to see new avatar', 4);
         })
     });
 
