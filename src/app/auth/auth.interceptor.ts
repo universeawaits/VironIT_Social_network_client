@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 tap(
                     succ => { }, 
                     err => {
-                        if (err.status === 401) {
+                        if (err.status === 401 || err.status === 0) {
                             localStorage.removeItem('jwt:token');
                             this.router.navigateByUrl('/login');
                         }
