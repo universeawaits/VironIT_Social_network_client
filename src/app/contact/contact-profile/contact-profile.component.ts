@@ -65,11 +65,26 @@ export class ContactProfileComponent implements OnInit {
    }
 
   changeIsBlockedStatus() {
-    this.contact.isBlocked = !this.contact.isBlocked;
     if (this.contact.isBlocked) {
-      this.contact.isContact = false;      
+      this.contactService.unblock(this.contact.user.email).subscribe(
+        () => {
+          this.contact.isBlocked = false;
+          this.openSnackBar('contact unblocked', 3);
+        }
+      );
+    } else {
+      this.contactService.block(this.contact.user.email).subscribe(
+        () => {
+          this.contactService.removeContact(this.contact.user.email).subscribe(
+            () => {
+              this.contact.isBlocked = true;
+              this.contact.isContact = false;
+              this.openSnackBar('contact blocked', 3);
+            }
+          )
+        }
+      );
     }
-    this.openSnackBar(this.contact.isBlocked ? 'contact blocked' : 'contact unblocked', 3);
   }
 
   changeMode() {
@@ -109,16 +124,17 @@ export class ContactProfileComponent implements OnInit {
       this.contactService.removeContact(this.contact.user.email).subscribe(
         () => {
           this.contact.isContact = false;
+          this.openSnackBar('contact removed', 3);
         }
       );
     } else {
       this.contactService.addContact(this.contact.user.email).subscribe(
         () => {
           this.contact.isContact = true;
+          this.openSnackBar('contact added', 3);
         }
       );
     }
-    this.openSnackBar(this.contact.isContact ? 'contact added' : 'contact removed', 4);
   }
 
   viewName() {

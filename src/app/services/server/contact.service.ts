@@ -41,4 +41,24 @@ export class ContactService {
     );
     return result;
   }
+
+  block(contactEmail: string): Observable<any>  {
+    let result = new Observable<any>();
+    result = this.httpClient.post(
+      this.contactsUrl + '/block', 
+      { BlockingUserEmail: localStorage.getItem('jwt:email'), BlockedUserEmail: contactEmail },
+      { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token')} }
+    );
+    return result;
+  }
+
+  unblock(contactEmail: string): Observable<any> {
+    let result = new Observable<any>();
+    result = this.httpClient.post(
+      this.contactsUrl + '/unblock', 
+      { BlockingUserEmail: localStorage.getItem('jwt:email'), BlockedUserEmail: contactEmail },
+      { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token')} }
+    );
+    return result;
+  }
 }

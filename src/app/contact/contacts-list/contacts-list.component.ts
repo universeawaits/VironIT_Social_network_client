@@ -40,17 +40,24 @@ export class ContactsListComponent implements OnInit, OnDestroy {
                 }
               );
             } else {
-              this.contactService.getAll().subscribe(
-                contacts => {
-                  this.contacts = contacts.forEach(contact => {
-                    if (!contact.user.avatar) {
-                      contact.user.avatar = this.contactsAvatarsSrc + '/account.jpg';
-                    }
-                  });
-                }
-              );
+              this.initContacts();
             }
         });
+    this.initContacts();
+  }
+
+  initContacts() {
+    this.contactService.getAll().subscribe(
+      contacts => {
+        contacts.forEach(contact => {
+          if (!contact.user.avatar) {
+            contact.user.avatar = this.contactsAvatarsSrc + '/account.jpg';
+          }
+          console.log(contact.user.name);
+        });
+        this.contacts = contacts;
+      }
+    );
   }
 
   selectContact(contact: Contact) {
