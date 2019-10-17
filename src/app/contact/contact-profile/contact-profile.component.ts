@@ -106,14 +106,18 @@ export class ContactProfileComponent implements OnInit {
 
   changeIsContactStatus() {
     if (this.contact.isContact) {
-      this.contactService.removeContact(this.contact.user.email);
+      this.contactService.removeContact(this.contact.user.email).subscribe(
+        () => {
+          this.contact.isContact = false;
+        }
+      );
     } else {
-      this.contactService.addContact(this.contact.user.email).subscribe(() => {
-        
-      });
+      this.contactService.addContact(this.contact.user.email).subscribe(
+        () => {
+          this.contact.isContact = true;
+        }
+      );
     }
-
-    this.contact.isContact = !this.contact.isContact;
     this.openSnackBar(this.contact.isContact ? 'contact added' : 'contact removed', 4);
   }
 
