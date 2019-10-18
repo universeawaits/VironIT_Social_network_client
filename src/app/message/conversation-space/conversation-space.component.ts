@@ -1,8 +1,8 @@
 import { Component, OnInit, NgZone, Input, OnDestroy } from '@angular/core';
 import { Message } from '../../model/message';
 import { MessageService } from '../../services/server/message.service';
-import { MessageContactBindingService } from 'src/app/services/component/message-contact-binding.service';
 import { Subscription } from 'rxjs';
+import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
 
 @Component({
   selector: 'conversation-space',
@@ -20,16 +20,16 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
   constructor(  
     private messageService: MessageService,  
     private _ngZone: NgZone,
-    private messageContactBindingService: MessageContactBindingService
+    private messageContactBindingService: ContactListProfileBindingService
   ) {
-    this.subscribeToEvents();  
+    this.subscribeToEvents();
   }
 
   ngOnInit() {
-    this.contactEmailSubscription = this.messageContactBindingService.getEmail()
+    this.contactEmailSubscription = this.messageContactBindingService.getContact()
         .subscribe(
-          email => {
-            this.toEmail = email;
+          contact => {
+            this.toEmail = contact.user.email;
             this.messageService.getHistory(this.toEmail).subscribe(
               messages => {
                 this.messages = messages;

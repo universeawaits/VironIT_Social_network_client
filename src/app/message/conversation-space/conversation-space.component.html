@@ -2,7 +2,7 @@
     <div *ngIf="!toEmail" class="null-contact">select a contact to start conversation</div>
     <div *ngIf="toEmail">
         <div class="messages-container">
-            <div *ngFor="let message of messages" class="message message-container">
+            <div *ngFor="let message of messages" class="message-container">
                 <div [class.message-from]="message.fromEmail == toEmail"
                 [class.message-to]="message.fromEmail == fromEmail">
                     {{ message.text }}
