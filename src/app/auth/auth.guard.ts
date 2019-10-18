@@ -7,7 +7,7 @@ import { AuthService } from '../services/server/auth.service';
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private router : Router,
+    private router: Router,
     private authService: AuthService
     ) { }
 
@@ -18,11 +18,7 @@ export class AuthGuard implements CanActivate {
         return true;
       }
       
-      this.authService.logout().subscribe(
-        () => {
-          this.router.navigate(['login']);
-        }
-      );
+      this.router.navigate(['login']);
       return false;
   }
 }

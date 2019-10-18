@@ -7,6 +7,7 @@ import { UserRegisterComponent } from './auth/register/user-register/user-regist
 import { AuthComponent } from './auth/auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { MessageComponent } from './message/message/message.component';
+import { EmptyComponent } from './navigation/empty/empty.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'contacts', component: ContactComponent, canActivate: [ AuthGuard ] },
   { path: 'register', component: UserRegisterComponent },
   { path: 'login', component: AuthComponent },
-  { path: 'messages', component: MessageComponent, canActivate: [ AuthGuard ] }
+  { path: 'messages', component: MessageComponent, canActivate: [ AuthGuard ] },
+  { path: '**', component: EmptyComponent }
 ];
 
 @NgModule({
