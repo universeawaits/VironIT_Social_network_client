@@ -3,10 +3,13 @@ import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { tap } from 'rxjs/operators';
+import { AuthService } from '../services/server/auth.service';
  
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private router: Router) { }
+    constructor(
+        private router: Router,
+        private authService: AuthService) { }
  
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.headers.get('No-Auth') == "True") {
@@ -23,8 +26,12 @@ export class AuthInterceptor implements HttpInterceptor {
                     succ => { }, 
                     err => {
                         if (err.status === 401 || err.status === 0) {
-                            localStorage.removeItem('jwt:token');
-                            this.router.navigateByUrl('/login');
+                            this.authService.logout().subscribe(
+                                () => {
+                                  localStorage.removeItem('jwt:token');
+                                  this.router.navigate(['login']);
+                                }
+                              );
                         }
                     })
               );

@@ -20,7 +20,8 @@ export class MessageService {
     this.startConnection();  
   }
   
-  sendMessage(message: Message) {  
+  sendMessage(message: Message) {
+    console.log(message.text)
     this._hubConnection.invoke('SendMessage', message);  
   }  
   
@@ -49,6 +50,6 @@ export class MessageService {
   private registerOnServerEvents(): void {  
     this._hubConnection.on('messageReceived', (data: any) => {  
       this.messageReceived.emit(data);  
-    });  
+    });
   }  
 }    
