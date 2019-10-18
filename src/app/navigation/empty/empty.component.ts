@@ -11,7 +11,6 @@ export class EmptyComponent implements OnInit {
   constructor(private titleService: Title) { }
 
   ngOnInit() {
-    this.titleService.setTitle('empty space');
+    this.titleService.setTitle('skies :: empty space');
   }
-
 }

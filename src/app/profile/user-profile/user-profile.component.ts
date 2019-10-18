@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/server/auth.service';
 import { Router } from '@angular/router';
 import { ImageService, Image } from 'src/app/services/server/image.service';
 import { UserService } from 'src/app/services/server/user.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -29,10 +30,13 @@ export class UserProfileComponent implements OnInit {
     private snackBar: MatSnackBar,
     private authService: AuthService,
     private imageService: ImageService,
-    private userService: UserService
+    private userService: UserService,
+    private titleService: Title
     ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('skies :: profile');
+
     this.editForm = new FormGroup({
       name: new FormControl('', [ 
         Validators.required, 

@@ -8,7 +8,8 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'skies';
-  route: string = '';
+  private headerVisibility: boolean = false;
+  private route: string = '';
 
   constructor (
     private router: Router
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
       event => {
         if (event instanceof NavigationEnd) {
           this.route = this.router.url;
+          this.headerVisibility = (this.route !== '/register' && this.route !== '/login');
         }
       }
     )

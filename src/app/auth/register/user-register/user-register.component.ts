@@ -3,6 +3,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/server/user.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'user-register',
@@ -16,9 +17,13 @@ export class UserRegisterComponent implements OnInit {
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router,
+    private titleService: Title
+    ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('skies :: register');
+
     this.registerForm = new FormGroup({
       name: new FormControl(null, [
         Validators.required,
@@ -50,7 +55,6 @@ export class UserRegisterComponent implements OnInit {
   }
 
   submit() {
-    // on server
     this.userService.register({ 
       Username: this.registerForm.get('name').value,
       Email: this.registerForm.get('email').value,

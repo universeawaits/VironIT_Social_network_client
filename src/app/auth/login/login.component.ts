@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/server/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'login',
@@ -15,10 +16,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('skies :: login');
+
     this.loginForm = new FormGroup({
       login: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)

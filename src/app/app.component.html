@@ -1,5 +1,5 @@
 <div class="content-container">
-    <header *ngIf="route != '/register' && route != '/login'"></header>
+    <header *ngIf="headerVisibility"></header>
     <div class="router-outlet-container">
         <router-outlet></router-outlet>
     </div>
