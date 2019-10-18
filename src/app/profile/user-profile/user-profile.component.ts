@@ -77,10 +77,11 @@ export class UserProfileComponent implements OnInit {
     
     var passwordControl = this.editForm.get('password');
 
-    this.userService.updateData({ Name: nameControl.value, Password: passwordControl.value }).subscribe(
-      () => {
-        this.openSnackBar("changes saved", 3);
-      }
+    this.userService.updateData({ Name: nameControl.value, Password: passwordControl.value })
+      .subscribe(
+        () => {
+          this.openSnackBar("changes saved", 3);
+        }
     );
   }
 
@@ -128,7 +129,7 @@ export class UserProfileComponent implements OnInit {
           this.openSnackBar(response.error, 4);
         },
         () => {
-          this.openSnackBar('reload to see new avatar', 4);
+          this.openSnackBar('wait a bit & reload to see new avatar', 4);
         })
     });
 

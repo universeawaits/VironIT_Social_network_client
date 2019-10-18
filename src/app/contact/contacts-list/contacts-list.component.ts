@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
 import { ContactService } from 'src/app/services/server/contact.service';
 import { SearchService } from 'src/app/services/server/search.service';
+import { MessageContactBindingService } from 'src/app/services/component/message-contact-binding.service';
 
 @Component({
   selector: 'contacts-list',
@@ -19,6 +20,7 @@ export class ContactsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private contactListProfileBindingService: ContactListProfileBindingService,
+    private messageContactBindingService: MessageContactBindingService,
     private contactListSearchBindingService: ContactListSearchBindingService,
     private contactService: ContactService,
     private searchService: SearchService
@@ -61,6 +63,7 @@ export class ContactsListComponent implements OnInit, OnDestroy {
 
   selectContact(contact: Contact) {
     this.contactListProfileBindingService.updateContact(contact);
+    this.messageContactBindingService.updateEmail(contact.user.email);
   }
 
   viewName(contact: Contact) {
