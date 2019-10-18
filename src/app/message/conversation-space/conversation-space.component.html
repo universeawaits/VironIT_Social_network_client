@@ -1,6 +1,11 @@
 <div class="conversation-space-container mat-elevation-z14">    
     <div *ngIf="!toEmail" class="null-contact">select a contact to start conversation</div>
     <div *ngIf="toEmail">
+        <div class="contact-info">
+            <span *ngIf="!receiver.pseudonym" class="contact-info-name"> {{ receiver.user.name }} </span>
+            <span *ngIf="receiver.pseudonym" class="contact-info-name"> {{ receiver.pseudonym }} </span>
+            <span class="contact-info-email"> {{ receiver.user.email }} </span>
+        </div>
         <div class="messages-container">
             <div *ngFor="let message of messages" class="message-container">
                 <div [class.message-from]="message.fromEmail == toEmail"

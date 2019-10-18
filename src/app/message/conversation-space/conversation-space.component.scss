@@ -37,9 +37,27 @@ $conversation-space-height: 470px;
     color: rgba(#e4e4e4, 0.6);
 }
 
+.contact-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+
+    font-size: 18px;
+}
+
+.contact-info-name {
+    margin: 10px 0 0 10px;
+}
+
+.contact-info-email {
+    margin: 10px 0 0 12px;
+    color: rgba($color: #e4e4e4, $alpha: 0.5)
+}
+
 .messages-container {
-    height: $conversation-space-height - 70px;
-    max-height: $conversation-space-height - 70px;
+    height: $conversation-space-height - 100px;
+    max-height: $conversation-space-height - 100px;
 
     scroll-behavior: smooth;
     overflow: auto;

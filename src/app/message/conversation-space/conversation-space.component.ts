@@ -3,6 +3,7 @@ import { Message } from '../../model/message';
 import { MessageService } from '../../services/server/message.service';
 import { Subscription } from 'rxjs';
 import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
+import { Contact } from 'src/app/model/contact';
 
 @Component({
   selector: 'conversation-space',
@@ -16,6 +17,8 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
   private messageText: string = '';
   private messages: Message[] = [];
   message = new Message();
+
+  private receiver: Contact = new Contact();
 
   constructor(  
     private messageService: MessageService,  
@@ -35,6 +38,8 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
                 this.messages = messages;
               }
             );
+
+            this.receiver = contact;
         });
 
     this.fromEmail = localStorage.getItem('jwt:email');
@@ -43,7 +48,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
   sendMessage() {
     if (this.messageText) {  
       this.message = new Message();
-      this.message.fromEmail = localStorage.getItem('jwt:email');
+      this.message.fromEmail = this.fromEmail;
       this.message.toEmail = this.toEmail;
       this.message.text = this.messageText;  
       this.message.dateTime = new Date();
@@ -52,7 +57,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     }  
   }
 
-  private subscribeToEvents(): void {
+  private subscribeToEvents() {
     this.messageService.messageReceived.subscribe((message: Message) => {  
       this._ngZone.run(() => {
         this.messages.push(message);
