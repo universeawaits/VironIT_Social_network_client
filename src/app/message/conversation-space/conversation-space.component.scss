@@ -1,0 +1,19 @@
+$conversation-space-width: 300px;
+
+.conversation-space-container {
+    background: transparent;
+    backdrop-filter: blur(50px);
+    border-radius: 0px;
+
+    padding: 10px;
+    height: 470px;
+
+    scroll-behavior: smooth;
+    overflow: auto;
+
+    width: $conversation-space-width;
+    transition: all 0.2s ease-in;
+
+    display: flex;
+    flex-direction: column;
+}

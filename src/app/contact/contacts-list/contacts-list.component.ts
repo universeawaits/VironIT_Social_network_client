@@ -53,7 +53,6 @@ export class ContactsListComponent implements OnInit, OnDestroy {
           if (!contact.user.avatar) {
             contact.user.avatar = this.contactsAvatarsSrc + '/account.jpg';
           }
-          console.log(contact.user.name);
         });
         this.contacts = contacts;
       }

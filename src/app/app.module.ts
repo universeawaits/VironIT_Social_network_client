@@ -11,6 +11,7 @@ import { RegisterModule } from './auth/register/register.module';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { MessageModule } from './message/message.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     ContactModule,
     RegisterModule,
     AuthModule,
+    MessageModule,
     HttpClientModule
   ],
   providers: [

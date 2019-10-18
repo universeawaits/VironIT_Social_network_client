@@ -6,13 +6,15 @@ import { ContactComponent } from './contact/contact/contact.component';
 import { UserRegisterComponent } from './auth/register/user-register/user-register.component';
 import { AuthComponent } from './auth/auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
+import { MessageComponent } from './message/message/message.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: 'profile', component: UserProfileComponent, canActivate: [ AuthGuard ] },
   { path: 'contacts', component: ContactComponent, canActivate: [ AuthGuard ] },
   { path: 'register', component: UserRegisterComponent },
-  { path: 'login', component: AuthComponent }
+  { path: 'login', component: AuthComponent },
+  { path: 'messages', component: MessageComponent, canActivate: [ AuthGuard ] }
 ];
 
 @NgModule({

@@ -1,0 +1,10 @@
+$conversation-space-width: 300px;
+
+.message-space-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.message-space-container > * {
+    margin: 6px;
+}
