@@ -3,14 +3,14 @@
     <div *ngIf="toEmail">
         <div class="messages-container">
             <div *ngFor="let message of messages" class="message message-container">
-                <div [class.message-from]="message.status == 'received'"
-                [class.message-to]="message.status == 'sent'">
+                <div [class.message-from]="message.fromEmail == toEmail"
+                [class.message-to]="message.fromEmail == fromEmail">
                     {{ message.text }}
                 </div>
             </div>
         </div>
         <div class="message-send-container">
-            <input class="message-text" type="text" [(ngModel)]="messageText" placeholder="type some words...">
+            <input class="message-send-text" type="text" [(ngModel)]="messageText" placeholder="type some words...">
             <button mat-icon-button disableRipple (click)="sendMessage()">
                 <mat-icon>send</mat-icon>
             </button>

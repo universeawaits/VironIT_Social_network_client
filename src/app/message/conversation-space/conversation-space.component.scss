@@ -24,7 +24,7 @@ $conversation-space-height: 470px;
     justify-content: center;
 }
 
-.message-text {
+.message-send-text {
     border: none;
     background: transparent;
     outline: none;
@@ -38,13 +38,14 @@ $conversation-space-height: 470px;
 }
 
 .messages-container {
-    height: 90%;
+    height: $conversation-space-height - 70px;
     max-height: $conversation-space-height - 70px;
 
     scroll-behavior: smooth;
     overflow: auto;
 
-    padding: 14px 6px 14px 14px;
+    padding: 0 14px 0 14px;
+    margin: 10px 2px 10px 10px;
 }
 
 .messages-container::-webkit-scrollbar-track {
@@ -64,6 +65,7 @@ $conversation-space-height: 470px;
 
 .message-container {
     margin: 14px 0px 14px 0px;
+    word-wrap: break-word;
 }
 
 .message-to {
