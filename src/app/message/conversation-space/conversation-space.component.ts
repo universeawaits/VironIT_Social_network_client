@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone, Input } from '@angular/core';
 import { Message } from '../../model/message';
 import { MessageService } from '../../services/server/message.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'conversation-space',

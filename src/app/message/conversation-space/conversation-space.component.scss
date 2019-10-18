@@ -1,4 +1,4 @@
-$conversation-space-width: 300px;
+$conversation-space-width: 350px;
 
 .conversation-space-container {
     background: transparent;
@@ -8,12 +8,40 @@ $conversation-space-width: 300px;
     padding: 10px;
     height: 470px;
 
-    scroll-behavior: smooth;
-    overflow: auto;
-
     width: $conversation-space-width;
     transition: all 0.2s ease-in;
 
     display: flex;
     flex-direction: column;
+}
+
+.message-send-container {
+    display: flex;
+    flex-direction: column;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.messages-container {
+    width: 90%;
+    height: 90%;
+
+    scroll-behavior: smooth;
+    overflow: auto;
+
+    padding: 14px;
+}
+
+.message-text {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 80%;
+
+    padding: 10px;
+}
+
+::placeholder {
+    color: rgba(#e4e4e4, 0.6);
 }
