@@ -17,7 +17,6 @@ export class ContactsListComponent implements OnInit, OnDestroy {
   
   private contactsSubscription: Subscription;
   private contacts: Contact[] = [];
-  private selectedContact: Contact;
 
   constructor(
     private contactListProfileBindingService: ContactListProfileBindingService,
@@ -38,7 +37,9 @@ export class ContactsListComponent implements OnInit, OnDestroy {
                       probContact.user.avatar = this.contactsAvatarsSrc + '/account.jpg';
                     }
                   });
-                  this.contacts = probContacts;
+                  this.contacts = probContacts.filter(
+                    contact => contact.user.email !== localStorage.getItem('jwt:email')
+                    );
                 }
               );
             } else {
@@ -59,13 +60,10 @@ export class ContactsListComponent implements OnInit, OnDestroy {
         this.contacts = contacts;
       }
     );
-    this.selectedContact = new Contact();
-    this.selectedContact.user = new UserProfile();
   }
 
   selectContact(contact: Contact) {
     this.contactListProfileBindingService.updateContact(contact);
-    this.selectedContact = contact;
   }
 
   viewName(contact: Contact) {

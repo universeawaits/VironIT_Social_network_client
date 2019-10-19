@@ -5,7 +5,7 @@
                 src="{{ contact.user.avatar }}" 
                 class="contact-avatar mat-elevation-z14"
                 [class.contact-avatar-online]="contact.isOnline">
-            <h4 mat-line [class.selected-contact]="contact.user.email == selectedContact.user.email">{{viewName(contact)}}</h4>
+            <h4 mat-line>{{ viewName(contact) }}</h4>
         </mat-list-item>
     </mat-list>
     <div *ngIf="contacts && contacts.length == 0" class="no-search-results">

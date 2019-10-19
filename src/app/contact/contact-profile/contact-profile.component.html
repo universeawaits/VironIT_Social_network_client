@@ -48,7 +48,7 @@
             {{ contact.user.phone }}
         </div>
 
-        <div *ngIf="mode == 'view' && !contact.isOnline" class="contact-card-footer">last seen {{ contact.lastSeen | date:"MMM dd ''yy, h:mm a" }}</div>
+        <div *ngIf="(mode == 'view' || mode == 'search') && !contact.isOnline" class="contact-card-footer">last seen {{ contact.lastSeen | date:"MMM dd ''yy, h:mm a" }}</div>
         
         <div *ngIf="mode == 'view' || mode == 'search'" class="contact-card-actions">
             <button *ngIf="!contact.isContact && !contact.isBlocked" mat-icon-button disableRipple (click)="changeIsContactStatus()">
