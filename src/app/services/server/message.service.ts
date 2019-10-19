@@ -31,7 +31,14 @@ export class MessageService {
   getHistory(withEmail: string): Observable<Message[]> {
     return this.httpClient.get<Message[]>(
       this.serverHost + 'messages/history?withEmail=' + withEmail, 
-      { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token')} }
+      { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token') } }
+      );
+  }
+
+  clearHistory(withEmail: string) {
+    return this.httpClient.delete(
+      this.serverHost + 'messages/clearHistory?withEmail=' + withEmail, 
+      { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token') } }
       );
   }
   

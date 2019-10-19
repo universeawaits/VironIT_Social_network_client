@@ -102,3 +102,11 @@ $conversation-space-height: 470px;
 
     transition: all 0.2s ease-in;
 }
+
+#clearHistory {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+}

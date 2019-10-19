@@ -57,6 +57,14 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     }  
   }
 
+  clearHistory() {
+    this.messageService.clearHistory(this.toEmail).subscribe(
+      () => {
+        this.messages = [];
+      }
+    )
+  }
+
   private subscribeToEvents() {
     this.messageService.messageReceived.subscribe((message: Message) => {  
       this._ngZone.run(() => {
