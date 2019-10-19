@@ -19,8 +19,11 @@
                 </div>
             </div>
         </div>
-        <div class="message-send-container">
+        <div class="message-actions-container">
             <input class="message-send-text" type="text" [(ngModel)]="messageText" placeholder="type some words...">
+            <button mat-icon-button disableRipple (click)="openEmojiDialog()">
+                <mat-icon>emoji_emotions</mat-icon>
+            </button>
             <button mat-icon-button disableRipple (click)="sendMessage()">
                 <mat-icon>send</mat-icon>
             </button>

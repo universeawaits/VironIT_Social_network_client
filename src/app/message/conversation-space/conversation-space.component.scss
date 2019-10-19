@@ -16,7 +16,7 @@ $conversation-space-height: 470px;
     flex-direction: column;
 }
 
-.message-send-container {
+.message-actions-container {
     display: flex;
     flex-direction: column;
     flex-flow: row wrap;
@@ -28,7 +28,7 @@ $conversation-space-height: 470px;
     border: none;
     background: transparent;
     outline: none;
-    width: 80%;
+    width: 70%;
 
     padding: 10px 10px 0px 0px;
 }

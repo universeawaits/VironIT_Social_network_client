@@ -1,3 +1,5 @@
-<button *ngFor="let emoji of emojis" (click)="addEmoji(emoji.key)">
-    {{ emoji.value }}
-</button>
+<div class="emoji-container">
+    <button *ngFor="let emoji of emojis" (click)="addEmoji(emoji)">
+        {{ emoji }}
+    </button>
+</div>

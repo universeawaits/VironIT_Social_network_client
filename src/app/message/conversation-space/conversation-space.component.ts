@@ -4,6 +4,9 @@ import { MessageService } from '../../services/server/message.service';
 import { Subscription } from 'rxjs';
 import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
 import { Contact } from 'src/app/model/contact';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { EmojiDialogComponent } from '../emoji-dialog/emoji-dialog.component';
+import { EmojiIntoMessageService } from 'src/app/services/component/emoji-into-message.service';
 
 @Component({
   selector: 'conversation-space',
@@ -20,10 +23,12 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
 
   private receiver: Contact = new Contact();
 
-  constructor(  
+  constructor(
     private messageService: MessageService,  
     private _ngZone: NgZone,
-    private messageContactBindingService: ContactListProfileBindingService
+    private messageContactBindingService: ContactListProfileBindingService,
+    private emojiService: EmojiIntoMessageService,
+    private emojiDialog: MatDialog
   ) {
     this.subscribeToEvents();
   }
@@ -44,6 +49,18 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
 
     this.fromEmail = localStorage.getItem('jwt:email');
   }
+
+  openEmojiDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.hasBackdrop = false;
+    dialogConfig.panelClass = 'emoji-dialog';
+
+    this.emojiDialog.open(EmojiDialogComponent, dialogConfig);
+    
+}
 
   sendMessage() {
     if (this.messageText) {  
@@ -71,6 +88,12 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
         this.messages.push(message);
       });
     });
+
+    this.emojiService.emojiSelected.subscribe(emoji =>
+      this._ngZone.run(() => {
+        this.messageText += emoji;
+      })
+    );
   }
 
   ngOnDestroy() {

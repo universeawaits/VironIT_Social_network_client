@@ -1,8 +1,11 @@
 .emoji-container {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
+    background: transparent;
     backdrop-filter: blur(50px);
     overflow: auto;
+
+    text-align: center;
 }
 
 .emoji-container::-webkit-scrollbar-track {
@@ -22,4 +25,17 @@
 
 button {
     margin: 3px;
+    font-size: 20px;
+    height: 10px;
+    border: none;
+    background: transparent;
+    outline: none;
+
+    transition: all 0.2s ease-in;
+}
+
+button:hover {
+    text-shadow: 0 0 5px #e4e4e4;
+    
+    transition: all 0.2s ease-in;
 }

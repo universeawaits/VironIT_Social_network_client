@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
+import { MatDialogModule } from "@angular/material";
 
 
 
@@ -23,11 +24,15 @@ import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     FormsModule
   ],
   exports: [
     MessageComponent,
     ConversationSpaceComponent
+  ],
+  entryComponents: [
+    EmojiDialogComponent
   ]
 })
 export class MessageModule { }
