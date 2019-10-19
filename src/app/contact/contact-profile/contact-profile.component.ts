@@ -111,7 +111,12 @@ export class ContactProfileComponent implements OnInit {
   editPseudonym() {
     var pseudonymControl = this.editForm.get('pseudonym');
     if (pseudonymControl.valid) {
-      this.contact.pseudonym = pseudonymControl.value;
+      this.contactService.changePseudonym(this.contact.user.email, pseudonymControl.value)
+        .subscribe(
+          () => {
+            this.contact.pseudonym = pseudonymControl.value;
+          }
+      );
     }
   }
 

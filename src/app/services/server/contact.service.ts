@@ -61,4 +61,19 @@ export class ContactService {
     );
     return result;
   }
+
+  changePseudonym(contactEmail: string, pseudo: string) {
+    let result = new Observable<any>();
+    result = this.httpClient.post(
+      this.contactsUrl + '/setPseudonym', 
+      { PseudoFromUserEmail: 
+          localStorage.getItem('jwt:email'), 
+        PseudoForUserEmail: 
+          contactEmail, 
+        PseudonymRaw: 
+          pseudo },
+      { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token')} }
+    );
+    return result;
+  }
 }
