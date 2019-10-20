@@ -20,6 +20,10 @@
                         <img *ngIf="message.messageMedia.type == 'Image'" 
                             src="{{ message.messageMedia.link }}"
                             draggable="false">
+                        <audio *ngIf="message.messageMedia.type == 'Audio'"
+                            controls preload="metadata"
+                            src="{{ message.messageMedia.link }}">
+                        </audio>
                     </div>
                 </div>
             </div>
