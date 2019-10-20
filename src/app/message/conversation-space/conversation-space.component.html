@@ -16,15 +16,23 @@
                 <div [class.message-from]="message.fromEmail == toEmail"
                 [class.message-to]="message.fromEmail == fromEmail">
                     {{ message.text }}
+                    <div *ngIf="message.messageMedia">
+                        <img *ngIf="message.messageMedia.type == 'Image'" 
+                            src="{{ message.messageMedia.link }}">
+                    </div>
                 </div>
             </div>
         </div>
         <div class="message-actions-container">
             <input class="message-send-text" type="text" [(ngModel)]="messageText" placeholder="type some words...">
+            <button mat-icon-button disableRipple type="button" (click)="fileInput.click()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <input hidden #fileInput (change)="processFile(fileInput)" type="file">
             <button mat-icon-button disableRipple (click)="openEmojiDialog()">
                 <mat-icon>emoji_emotions</mat-icon>
             </button>
-            <button mat-icon-button disableRipple (click)="sendMessage()">
+            <button mat-icon-button disableRipple (click)="sendTextMessage()">
                 <mat-icon>send</mat-icon>
             </button>
         </div>

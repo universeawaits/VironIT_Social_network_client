@@ -1,5 +1,10 @@
-<div class="emoji-container">
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="emoji-container">
     <button *ngFor="let emoji of emojis" (click)="addEmoji(emoji)">
         {{ emoji }}
+    </button>
+</div>
+<div class="close-button-container">
+    <button mat-icon-button disableRipple mat-dialog-close>
+        <mat-icon>close</mat-icon>
     </button>
 </div>

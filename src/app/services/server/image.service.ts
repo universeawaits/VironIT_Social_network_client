@@ -16,20 +16,25 @@ export class ImageService {
     private httpClient: HttpClient
     ) {}
 
-  public uploadImage(image: File) {
-    const formData = new FormData();
-    formData.append('image', image);
-    formData.append('useremail', localStorage.getItem('jwt:email'));
+  public updateAvatar(image: File) {
     return this.httpClient.post(
       this.imagesUrl + '/avatars',
-      formData
+      this.createFormData(image)
     );
   }
 
-  public getImages(): Observable<Image[]> {
-    if (!localStorage.getItem('user:username')) {
-      return this.httpClient.get<Image[]>(this.imagesUrl);
-    }
-    return this.httpClient.get<Image[]>(this.imagesUrl + '/' + localStorage.getItem('user:username'));
+  public uploadImage(image: File) {
+    return this.httpClient.post(
+      this.imagesUrl,
+      this.createFormData(image)
+    );
+  }
+
+  private createFormData(image: File): FormData {
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('useremail', localStorage.getItem('jwt:email'));
+
+    return formData;
   }
 }

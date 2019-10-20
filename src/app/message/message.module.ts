@@ -6,9 +6,10 @@ import { ContactModule } from '../contact/contact.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
 import { MatDialogModule } from "@angular/material";
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -25,7 +26,8 @@ import { MatDialogModule } from "@angular/material";
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   exports: [
     MessageComponent,

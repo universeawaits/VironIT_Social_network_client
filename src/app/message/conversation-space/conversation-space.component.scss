@@ -28,7 +28,7 @@ $conversation-space-height: 470px;
     border: none;
     background: transparent;
     outline: none;
-    width: 70%;
+    width: 60%;
 
     padding: 10px 10px 0px 0px;
 }
@@ -52,7 +52,10 @@ $conversation-space-height: 470px;
 
 .contact-info-email {
     margin: 10px 0 0 12px;
-    color: rgba($color: #e4e4e4, $alpha: 0.5)
+    color: rgba($color: #e4e4e4, $alpha: 0.5);
+
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .messages-container {
@@ -60,7 +63,8 @@ $conversation-space-height: 470px;
     max-height: $conversation-space-height - 100px;
 
     scroll-behavior: smooth;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     margin: 15px 2px 5px 15px;
 }
@@ -108,5 +112,14 @@ $conversation-space-height: 470px;
     justify-content: flex-end;
     align-items: center;
 
-    width: 100%;
+    width: 30%;
 }
+
+.message-container img {
+    width: $conversation-space-width - 100px;
+    padding: 1px;
+    border: 4px solid rgba($color: #5e5e5e, $alpha: 0.2);
+  
+    transition: all 0.2s ease-in;
+}
+

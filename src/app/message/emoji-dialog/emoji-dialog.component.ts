@@ -20,9 +20,7 @@ export class EmojiDialogComponent implements OnInit {
     private emojiService: EmojiIntoMessageService
   ) { }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
   addEmoji(emoji: string) {
     this.emojiService.addEmoji(emoji);

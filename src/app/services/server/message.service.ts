@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MessageService {  
-  private serverHost: string = 'https://localhost:44345/';
+  private hostUrl: string = 'https://localhost:44345/';
 
   messageReceived = new EventEmitter<Message>();
   connectionEstablished = new EventEmitter<Boolean>();  
@@ -30,14 +30,14 @@ export class MessageService {
 
   getHistory(withEmail: string): Observable<Message[]> {
     return this.httpClient.get<Message[]>(
-      this.serverHost + 'messages/history?withEmail=' + withEmail, 
+      this.hostUrl + 'messages/history?withEmail=' + withEmail, 
       { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token') } }
       );
   }
 
   clearHistory(withEmail: string) {
     return this.httpClient.delete(
-      this.serverHost + 'messages/clearHistory?withEmail=' + withEmail, 
+      this.hostUrl + 'messages/history?withEmail=' + withEmail, 
       { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token') } }
       );
   }
@@ -45,7 +45,7 @@ export class MessageService {
   private createConnection() {  
     this._hubConnection = new HubConnectionBuilder()
       .withUrl(
-        this.serverHost + 'messageHub?token=' + localStorage.getItem('jwt:token'),
+        this.hostUrl + 'hubs/message?token=' + localStorage.getItem('jwt:token'),
         { accessTokenFactory: () => localStorage.getItem('jwt:token') }
       ).build();
   }

@@ -1,10 +1,17 @@
+$emoji-container-width: 210px;
+
 .emoji-container {
-    height: 200px;
-    width: 200px;
+    height: $emoji-container-width;
+    width: $emoji-container-width;
     background: transparent;
     backdrop-filter: blur(50px);
     overflow: auto;
 
+    text-align: center;
+}
+
+.close-button-container {
+    width: $emoji-container-width;
     text-align: center;
 }
 
@@ -35,7 +42,7 @@ button {
 }
 
 button:hover {
-    text-shadow: 0 0 5px #e4e4e4;
+    text-shadow: 0 0 10px #e4e4e4;
     
     transition: all 0.2s ease-in;
 }

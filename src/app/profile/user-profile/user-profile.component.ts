@@ -126,7 +126,7 @@ export class UserProfileComponent implements OnInit {
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new Image(event.target.result, file);
 
-      this.imageService.uploadImage(this.selectedFile.file).subscribe(
+      this.imageService.updateAvatar(this.selectedFile.file).subscribe(
         () => { },
         response => {
           this.selectedFile.link = '';
