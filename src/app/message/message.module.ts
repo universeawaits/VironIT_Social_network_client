@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
-import { MatDialogModule } from "@angular/material";
+import { MatDialogModule, MatSnackBarModule } from "@angular/material";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
@@ -26,6 +26,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
     FormsModule,
     DragDropModule
   ],

@@ -4,7 +4,7 @@ import { MessageService } from '../../services/server/message.service';
 import { Subscription } from 'rxjs';
 import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
 import { Contact } from 'src/app/model/contact';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { EmojiDialogComponent } from '../emoji-dialog/emoji-dialog.component';
 import { EmojiIntoMessageService } from 'src/app/services/component/emoji-into-message.service';
 
@@ -38,6 +38,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     private messageContactBindingService: ContactListProfileBindingService,
     private emojiService: EmojiIntoMessageService,
     private emojiDialog: MatDialog,
+    private snackBar: MatSnackBar,
     private mediaService: MediaService
   ) {
     this.subscribeToEvents();
@@ -134,22 +135,66 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     const file: File = fileInput.files[0];
     const reader = new FileReader();
 
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new FileToSend(event.target.result, file);
-
-    this.mediaService.uploadFile(this.selectedFile.file, file.type).subscribe(
-      _messageMedia => {
-        _messageMedia.type = this.getMediaType(file.type);
-        this.messageMedia = _messageMedia;
-        console.log(_messageMedia.link, _messageMedia.type);
-        this.sendMediaMessage();
-      },
-      response => {
-        this.selectedFile.link = '';
+    if (file) {
+      reader.addEventListener('load', (event: any) => {
+        this.selectedFile = new FileToSend(event.target.result, file);
+  
+        let size = file.size;
+        let type = this.getMediaType(file.type);
+  
+        if (!this.filterFileInput(size, type)) return;
+  
+        this.mediaService.uploadFile(this.selectedFile.file, file.type).subscribe(
+          _messageMedia => {
+            _messageMedia.type = type;
+            this.messageMedia = _messageMedia;
+            console.log(_messageMedia.link, _messageMedia.type);
+            this.sendMediaMessage();
+          },
+          response => {
+            this.selectedFile.link = '';
+          });
       });
-    });
+  
+      reader.readAsDataURL(file);
+    }
+  }
 
-    reader.readAsDataURL(file);
+  private filterFileInput (size: number, type: string): boolean {
+    let imageMaxSize = 2048 * 1024;
+    let audioMaxSize = 10240 * 1024;
+    let videoMaxSize = 40960 * 1024;
+
+    if (size > imageMaxSize && type == 'Image') {
+      this.openSnackBar('image size up to 2mb', 4);
+      return false;
+    }
+
+    if (size > videoMaxSize) {
+        this.openSnackBar('file size is too large', 4);
+        return false;
+    }
+
+    if (size > audioMaxSize && type == 'Audio') {
+      this.openSnackBar('audio size up to 10mb', 4);
+      return false;
+    }
+
+    if (size > videoMaxSize && type == 'Video') {
+      this.openSnackBar('video size up to 40mb', 4);
+      return false;
+    }
+
+    return true;
+  }
+  
+  openSnackBar(message: string, duration: number) {
+    this.snackBar.open(message, 'ok', {
+      duration: duration * 1000,
+      panelClass: [ 'snack-success' ],
+      horizontalPosition: "right",
+      verticalPosition: "bottom"
+    });
   }
 
   getMediaType(standType: string): string {

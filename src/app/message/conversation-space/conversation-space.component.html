@@ -18,7 +18,8 @@
                     {{ message.text }}
                     <div *ngIf="message.messageMedia">
                         <img *ngIf="message.messageMedia.type == 'Image'" 
-                            src="{{ message.messageMedia.link }}">
+                            src="{{ message.messageMedia.link }}"
+                            draggable="false">
                     </div>
                 </div>
             </div>
@@ -28,7 +29,7 @@
             <button mat-icon-button disableRipple type="button" (click)="fileInput.click()">
                 <mat-icon>add</mat-icon>
             </button>
-            <input hidden #fileInput (change)="processFile(fileInput)" type="file">
+            <input hidden multiple="false" #fileInput (change)="processFile(fileInput)" type="file" accept=".jpg, .jpeg, .mp4, .mp3">
             <button mat-icon-button disableRipple (click)="openEmojiDialog()">
                 <mat-icon>emoji_emotions</mat-icon>
             </button>
