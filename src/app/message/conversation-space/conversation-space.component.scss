@@ -125,3 +125,9 @@ $conversation-space-height: 500px;
     cursor: default;
 }
 
+audio {
+    width: $conversation-space-width - 100px;
+    height: 25px;
+    border-radius: 0;
+    outline: transparent;
+}
