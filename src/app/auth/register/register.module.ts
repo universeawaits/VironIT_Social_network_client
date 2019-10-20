@@ -21,8 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatInputModule,
-    MatSnackBarModule
+    MatInputModule
   ],
   exports: [
     UserRegisterComponent

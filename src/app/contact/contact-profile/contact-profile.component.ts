@@ -7,6 +7,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserProfile } from 'src/app/model/user.profile';
 import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
 import { ContactService } from 'src/app/services/server/contact.service';
+import { SnackbarService } from 'src/app/services/component/snackbar.service';
 
 @Component({
   selector: 'contact-profile',
@@ -27,7 +28,7 @@ export class ContactProfileComponent implements OnInit {
     private contactListProfileBindingService: ContactListProfileBindingService,
     private contactListSearchBindingService: ContactListSearchBindingService,
     private contactService: ContactService,
-    private snackBar: MatSnackBar
+    private snackbarService: SnackbarService
     ) {    
       this.contactSubscription = this.contactListProfileBindingService.getContact()
         .subscribe(
@@ -69,7 +70,7 @@ export class ContactProfileComponent implements OnInit {
       this.contactService.unblock(this.contact.user.email).subscribe(
         () => {
           this.contact.isBlocked = false;
-          this.openSnackBar('contact unblocked', 3);
+          this.snackbarService.open('contact unblocked', true);
         }
       );
     } else {
@@ -79,7 +80,7 @@ export class ContactProfileComponent implements OnInit {
             () => {
               this.contact.isBlocked = true;
               this.contact.isContact = false;
-              this.openSnackBar('contact blocked', 3);
+              this.snackbarService.open('contact blocked', true);
             }
           )
         }
@@ -90,7 +91,7 @@ export class ContactProfileComponent implements OnInit {
   changeMode() {
     if (this.mode == 'edit') { // unnec?
       this.editPseudonym();
-      this.openSnackBar("changes saved", 3);
+      this.snackbarService.open("changes saved", true);
     }
     this.mode = (this.mode === 'view') ? 'edit' : 'view';
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
@@ -101,7 +102,7 @@ export class ContactProfileComponent implements OnInit {
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
 
     this.editForm.get('pseudonym').setValue(this.contact.pseudonym);
-    this.openSnackBar("changes discarded", 3);
+    this.snackbarService.open("changes discarded", true);
   }
 
   clearControl(controlName: string) {
@@ -129,14 +130,14 @@ export class ContactProfileComponent implements OnInit {
       this.contactService.removeContact(this.contact.user.email).subscribe(
         () => {
           this.contact.isContact = false;
-          this.openSnackBar('contact removed', 3);
+          this.snackbarService.open('contact removed', true);
         }
       );
     } else {
       this.contactService.addContact(this.contact.user.email).subscribe(
         () => {
           this.contact.isContact = true;
-          this.openSnackBar('contact added', 3);
+          this.snackbarService.open('contact added', true);
         }
       );
     }
@@ -148,14 +149,5 @@ export class ContactProfileComponent implements OnInit {
 
   ngOnDestroy() {
     this.contactSubscription.unsubscribe();
-  }
-
-  openSnackBar(message: string, duration: number) {
-    this.snackBar.open(message, 'ok', {
-      duration: duration * 1000,
-      panelClass: [ 'snack-success' ],
-      horizontalPosition: "right",
-      verticalPosition: "bottom"
-    });
   }
 }

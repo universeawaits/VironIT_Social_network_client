@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { MessageModule } from './message/message.module';
+import { MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MessageModule } from './message/message.module';
   ],
   imports: [
     BrowserModule,
+    MatSnackBarModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NavigationModule,

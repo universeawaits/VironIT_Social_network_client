@@ -26,7 +26,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule,
     FormsModule,
     DragDropModule
   ],

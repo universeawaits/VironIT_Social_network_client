@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/server/user.service';
 import { Title } from '@angular/platform-browser';
+import { SnackbarService } from 'src/app/services/component/snackbar.service';
 
 @Component({
   selector: 'user-register',
@@ -16,7 +17,7 @@ export class UserRegisterComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private snackBar: MatSnackBar,
+    private snackbarService: SnackbarService,
     private router: Router,
     private titleService: Title
     ) { }
@@ -62,21 +63,12 @@ export class UserRegisterComponent implements OnInit {
       Password: this.registerForm.get('password').value
     }).subscribe(
       () => {
-        this.openSnackBar("check you email", 7);
+        this.snackbarService.open("check you email", true);
         this.router.navigateByUrl('/login');
       },
       response => {
-        this.openSnackBar(response.error, 5);
+        this.snackbarService.open(response.error, false);
       }
     );
-  }
-
-  openSnackBar(message: string, duration: number) {
-    this.snackBar.open(message, 'ok', {
-      duration: duration * 1000,
-      panelClass: [ 'snack-success' ],
-      horizontalPosition: "right",
-      verticalPosition: "bottom"
-    });
   }
 }

@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SearchComponent } from './search/search.component';
 
 @NgModule({
@@ -30,8 +29,7 @@ import { SearchComponent } from './search/search.component';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatInputModule,
-    MatSnackBarModule
+    MatInputModule
   ],
   exports: [
     ContactsListComponent

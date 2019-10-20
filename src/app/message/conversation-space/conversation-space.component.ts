@@ -11,6 +11,7 @@ import { EmojiIntoMessageService } from 'src/app/services/component/emoji-into-m
 import { Image as FileToSend } from 'src/app/services/server/image.service';
 import { MediaService } from 'src/app/services/server/media.service';
 import { MessageMedia } from 'src/app/model/message-media';
+import { SnackbarService } from 'src/app/services/component/snackbar.service';
 
 @Component({
   selector: 'conversation-space',
@@ -38,7 +39,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     private messageContactBindingService: ContactListProfileBindingService,
     private emojiService: EmojiIntoMessageService,
     private emojiDialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private snackbarService: SnackbarService,
     private mediaService: MediaService
   ) {
     this.subscribeToEvents();
@@ -166,35 +167,26 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     let videoMaxSize = 40960 * 1024;
 
     if (size > imageMaxSize && type == 'Image') {
-      this.openSnackBar('image size up to 2mb', 4);
+      this.snackbarService.open('image size up to 2mb', false);
       return false;
     }
 
     if (size > videoMaxSize) {
-        this.openSnackBar('file size is too large', 4);
+        this.snackbarService.open('file size is too large', false);
         return false;
     }
 
     if (size > audioMaxSize && type == 'Audio') {
-      this.openSnackBar('audio size up to 10mb', 4);
+      this.snackbarService.open('audio size up to 10mb', false);
       return false;
     }
 
     if (size > videoMaxSize && type == 'Video') {
-      this.openSnackBar('video size up to 40mb', 4);
+      this.snackbarService.open('video size up to 40mb', false);
       return false;
     }
 
     return true;
-  }
-  
-  openSnackBar(message: string, duration: number) {
-    this.snackBar.open(message, 'ok', {
-      duration: duration * 1000,
-      panelClass: [ 'snack-success' ],
-      horizontalPosition: "right",
-      verticalPosition: "bottom"
-    });
   }
 
   getMediaType(standType: string): string {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/server/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { SnackbarService } from 'src/app/services/component/snackbar.service';
 
 @Component({
   selector: 'login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
+    private snackbarService: SnackbarService,
     private titleService: Title
   ) { }
 
@@ -42,17 +43,8 @@ export class LoginComponent implements OnInit {
         },
         response => 
         {
-          this.openSnackBar(response.error, 5);
+          this.snackbarService.open(response.error, false);
         }
       )
-  }
-
-  openSnackBar(message: string, duration: number) {
-    this.snackBar.open(message, 'ok', {
-      duration: duration * 1000,
-      panelClass: [ 'snack-success' ],
-      horizontalPosition: "right",
-      verticalPosition: "bottom"
-    });
   }
 }

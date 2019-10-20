@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ImageService, Image } from 'src/app/services/server/image.service';
 import { UserService } from 'src/app/services/server/user.service';
 import { Title } from '@angular/platform-browser';
+import { SnackbarService } from 'src/app/services/component/snackbar.service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthService,
     private imageService: ImageService,
     private userService: UserService,
-    private titleService: Title
+    private titleService: Title,
+    private snackbarService: SnackbarService
     ) { }
 
   ngOnInit() {
@@ -84,7 +86,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.updateData({ Name: nameControl.value, Password: passwordControl.value })
       .subscribe(
         () => {
-          this.openSnackBar("changes saved", 3);
+          this.snackbarService.open("changes saved", true);
         }
     );
   }
@@ -95,7 +97,7 @@ export class UserProfileComponent implements OnInit {
 
     this.editForm.get('name').setValue(this.user.name);
     this.editForm.get('password').setValue(null);
-    this.openSnackBar("changes discarded", 3);
+    this.snackbarService.open("changes discarded", true);
   }
 
   changeMode() {
@@ -104,15 +106,6 @@ export class UserProfileComponent implements OnInit {
     }
     this.mode = (this.mode === 'view') ? 'edit' : 'view';
     this.changeModeIcon = (this.mode === 'view') ? 'edit' : 'done';
-  }
-
-  openSnackBar(message: string, duration: number) {
-    this.snackBar.open(message, 'ok', {
-      duration: duration * 1000,
-      panelClass: [ 'snack-success' ],
-      horizontalPosition: "right",
-      verticalPosition: "bottom"
-    });
   }
 
   processFile(imageInput: any) {
@@ -130,10 +123,10 @@ export class UserProfileComponent implements OnInit {
         () => { },
         response => {
           this.selectedFile.link = '';
-          this.openSnackBar(response.error, 4);
+          this.snackbarService.open(response.error, false);
         },
         () => {
-          this.openSnackBar('wait a bit & reload to see new avatar', 4);
+          this.snackbarService.open('wait a bit & reload to see new avatar', true);
         })
     });
 

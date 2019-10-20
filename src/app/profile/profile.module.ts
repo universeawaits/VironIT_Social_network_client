@@ -25,8 +25,7 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatInputModule,
     MatRippleModule,
-    MatTooltipModule,
-    MatSnackBarModule
+    MatTooltipModule
   ],
   exports: [
     UserProfileComponent
