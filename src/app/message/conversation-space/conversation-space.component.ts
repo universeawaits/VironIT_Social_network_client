@@ -12,6 +12,7 @@ import { Image as FileToSend } from 'src/app/services/server/image.service';
 import { MediaService } from 'src/app/services/server/media.service';
 import { MessageMedia } from 'src/app/model/message-media';
 import { SnackbarService } from 'src/app/services/component/snackbar.service';
+import { ShareContactMessageBindingService } from 'src/app/services/component/share-contact-message-binding.service';
 
 @Component({
   selector: 'conversation-space',
@@ -39,6 +40,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     private _ngZone: NgZone,
     private messageContactBindingService: ContactListProfileBindingService,
     private emojiService: EmojiIntoMessageService,
+    private shareContactService: ShareContactMessageBindingService,
     private emojiDialog: MatDialog,
     private snackbarService: SnackbarService,
     private mediaService: MediaService
@@ -114,6 +116,10 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     this.messageService.sendMessage(this.message);
   }
 
+  sendContact(contact: Contact) {
+
+  }
+
   clearHistory() {
     this.messageService.clearHistory(this.toEmail).subscribe(
       () => {
@@ -130,14 +136,19 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     });
 
     this.emojiService.emojiSelected.subscribe(emoji =>
+        this.messageText += emoji
+    );
+
+    this.shareContactService.contactSelected.subscribe(contact =>
       this._ngZone.run(() => {
-        this.messageText += emoji;
+        
       })
     );
   }
 
   ngOnDestroy() {
     this.contactEmailSubscription.unsubscribe();
+    this.emojiDialog.closeAll();
   }
 
   processFile(fileInput: any) {

@@ -13,6 +13,6 @@ export class ContactComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('skies :: contacts');
+    this.titleService.setTitle('skies :: contact');
   }
 }

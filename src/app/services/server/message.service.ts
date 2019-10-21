@@ -61,7 +61,7 @@ export class MessageService {
       .catch(err => {
         setTimeout(function () { this.startConnection(); }, 5000);  
       });
-  }  
+  }
   
   private registerOnServerEvents(): void {  
     this._hubConnection.on('messageReceived', (data: any) => {  

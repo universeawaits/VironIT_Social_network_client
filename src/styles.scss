@@ -1,8 +1,3 @@
-/**
-* Generated theme by Material Theme Generator
-* https://material-theme-generator.travetto.io
-*/
-
 @import '~@angular/material/theming';
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -231,14 +226,15 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
       backdrop-filter: blur(50px);
       font-family: 'Montserrat' !important;
       border-radius: 0px !important;
+      border: 1px solid rgba(#e4e4e4, 0.5);
   }
-  //Added with panelClass property
+  
   .snack-error {
     button {
       color: $error;
     }
   }
-  //Added with panelClass property
+  
   .snack-success {
     button {
       color: $success;
@@ -253,6 +249,7 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
     backdrop-filter: blur(50px) !important;
     border-radius: 0 !important;
     padding: 15px !important;
+    border: 1px solid rgba(#e4e4e4, 0.5) !important;
 }
 
 // Specific component overrides, pieces that are not in line with the general theming

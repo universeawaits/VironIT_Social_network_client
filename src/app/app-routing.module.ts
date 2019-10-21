@@ -12,10 +12,10 @@ import { EmptyComponent } from './navigation/empty/empty.component';
 const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: 'profile', component: UserProfileComponent, canActivate: [ AuthGuard ] },
-  { path: 'contacts', component: ContactComponent, canActivate: [ AuthGuard ] },
+  { path: 'contact', component: ContactComponent, canActivate: [ AuthGuard ] },
   { path: 'register', component: UserRegisterComponent },
   { path: 'login', component: AuthComponent },
-  { path: 'messages', component: MessageComponent, canActivate: [ AuthGuard ] },
+  { path: 'message', component: MessageComponent, canActivate: [ AuthGuard ] },
   { path: '**', component: EmptyComponent }
 ];
 

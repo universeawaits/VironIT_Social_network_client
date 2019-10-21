@@ -13,8 +13,8 @@ interface Action {
 export class HeaderComponent implements OnInit {
   actions: Action[] = [
     { path: 'profile', icon: 'person' },
-    { path: 'messages', icon: 'message' },
-    { path: 'contacts', icon: 'contacts' }
+    { path: 'message', icon: 'message' },
+    { path: 'contact', icon: 'contacts' }
   ];
 
   constructor() { }

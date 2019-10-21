@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ContactService {
-  private contactsUrl: string = environment.appUrl + 'contacts';
+  private contactsUrl: string = environment.appUrl + 'contacts/';
 
   constructor(
     private httpClient: HttpClient
@@ -35,7 +35,7 @@ export class ContactService {
   block(contactEmail: string): Observable<any>  {
     let result = new Observable<any>();
     result = this.httpClient.post(
-      this.contactsUrl + '/blocks', 
+      this.contactsUrl + 'blocks', 
       { BlockingUserEmail: localStorage.getItem('jwt:email'), BlockedUserEmail: contactEmail }
     );
     return result;
@@ -44,7 +44,7 @@ export class ContactService {
   unblock(contactEmail: string): Observable<any> {
     let result = new Observable<any>();
     result = this.httpClient.post(
-      this.contactsUrl + '/blocks', 
+      this.contactsUrl + 'blocks', 
       { BlockingUserEmail: localStorage.getItem('jwt:email'), BlockedUserEmail: contactEmail }
     );
     return result;
@@ -53,7 +53,7 @@ export class ContactService {
   changePseudonym(contactEmail: string, pseudo: string) {
     let result = new Observable<any>();
     result = this.httpClient.post(
-      this.contactsUrl + '/pseudonyms', 
+      this.contactsUrl + 'pseudonyms', 
       { PseudoFromUserEmail: localStorage.getItem('jwt:email'), 
         PseudoForUserEmail: contactEmail, 
         PseudonymRaw: pseudo }

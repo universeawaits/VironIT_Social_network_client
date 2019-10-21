@@ -13,13 +13,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SearchComponent } from './search/search.component';
+import { ShareContactDialogComponent } from './share-contact-dialog/share-contact-dialog.component';
 
 @NgModule({
   declarations: [
     ContactsListComponent,
     ContactComponent,
     ContactProfileComponent,
-    SearchComponent
+    SearchComponent,
+    ShareContactDialogComponent
   ],
   imports: [
     CommonModule,
