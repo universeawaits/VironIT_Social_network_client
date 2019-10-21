@@ -12,7 +12,7 @@ import { SnackbarService } from 'src/app/services/component/snackbar.service';
   styleUrls: ['./user-register.component.scss']
 })
 export class UserRegisterComponent implements OnInit {
-  private registerForm: FormGroup;
+  registerForm: FormGroup;
   @ViewChild('password', { static: false }) passwordField: ElementRef;
 
   constructor(

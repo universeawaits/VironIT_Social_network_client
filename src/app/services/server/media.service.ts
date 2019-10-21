@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MessageMedia } from 'src/app/model/message-media';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MediaService {
-  private hostUrl = 'https://localhost:44345/';
+  private hostUrl = environment.appUrl;
 
   constructor(
     private httpClient: HttpClient

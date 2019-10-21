@@ -19,10 +19,10 @@ export class ContactProfileComponent implements OnInit {
   private searchModeSubscription: Subscription;
   public contact: Contact;
 
-  private mode: string = 'view';
-  private changeModeIcon: string = 'edit';
+  mode: string = 'view';
+  changeModeIcon: string = 'edit';
 
-  private editForm: FormGroup;
+  editForm: FormGroup;
 
   constructor(
     private contactListProfileBindingService: ContactListProfileBindingService,
@@ -76,7 +76,7 @@ export class ContactProfileComponent implements OnInit {
     } else {
       this.contactService.block(this.contact.user.email).subscribe(
         () => {
-          this.contactService.removeContact(this.contact.user.email).subscribe(
+          this.contactService.changeContactStatus(this.contact.user.email).subscribe(
             () => {
               this.contact.isBlocked = true;
               this.contact.isContact = false;
@@ -126,21 +126,12 @@ export class ContactProfileComponent implements OnInit {
   }
 
   changeIsContactStatus() {
-    if (this.contact.isContact) {
-      this.contactService.removeContact(this.contact.user.email).subscribe(
-        () => {
-          this.contact.isContact = false;
-          this.snackbarService.open('contact removed', true);
-        }
-      );
-    } else {
-      this.contactService.addContact(this.contact.user.email).subscribe(
-        () => {
-          this.contact.isContact = true;
-          this.snackbarService.open('contact added', true);
-        }
-      );
-    }
+    this.contactService.changeContactStatus(this.contact.user.email).subscribe(
+      () => {
+        this.contact.isContact = !this.contact.isContact;
+        this.snackbarService.open('contact ' + (this.contact.isContact ? 'added' : 'removed'), true);
+      }
+    );    
   }
 
   viewName() {
@@ -149,5 +140,6 @@ export class ContactProfileComponent implements OnInit {
 
   ngOnDestroy() {
     this.contactSubscription.unsubscribe();
+    this.searchModeSubscription.unsubscribe();
   }
 }

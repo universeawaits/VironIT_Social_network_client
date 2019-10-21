@@ -6,7 +6,7 @@
             <span *ngIf="receiver.pseudonym" class="contact-info-name"> {{ receiver.pseudonym }} </span>
             <span class="contact-info-email"> {{ receiver.user.email }} </span>
             <div id="clearHistory">
-                <button disableRipple mat-icon-button (click)="clearHistory(receiver.user.email)">
+                <button disableRipple mat-icon-button (click)="clearHistory()">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
@@ -34,7 +34,7 @@
                 <mat-icon>add</mat-icon>
             </button>
             <input hidden multiple="false" #fileInput (change)="processFile(fileInput)" type="file" accept=".jpg, .jpeg, .mp4, .mp3">
-            <button mat-icon-button disableRipple (click)="openEmojiDialog()">
+            <button [disabled]="emojiDialogOpened" mat-icon-button disableRipple (click)="openEmojiDialog()">
                 <mat-icon>emoji_emotions</mat-icon>
             </button>
             <button mat-icon-button disableRipple (click)="sendTextMessage()">

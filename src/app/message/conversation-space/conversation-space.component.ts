@@ -19,19 +19,20 @@ import { SnackbarService } from 'src/app/services/component/snackbar.service';
   styleUrls: ['./conversation-space.component.scss']
 })
 export class ConversationSpaceComponent implements OnInit, OnDestroy {
-  private messages: Message[] = [];
+  messages: Message[] = [];
 
   private contactEmailSubscription: Subscription;
-  private receiver: Contact = new Contact();
+  receiver: Contact = new Contact();
 
-  private fromEmail: string;
-  private toEmail: string;
-  private messageText: string = '';
-  private message: Message = new Message();
-  private messageMedia: MessageMedia;
+  fromEmail: string;
+  toEmail: string;
+  messageText: string = '';
+  message: Message = new Message();
+  messageMedia: MessageMedia;
 
   private selectedFile: FileToSend; 
 
+  emojiDialogOpened: boolean;
 
   constructor(
     private messageService: MessageService,  
@@ -62,6 +63,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
         });
 
     this.fromEmail = localStorage.getItem('jwt:email');
+    this.emojiDialogOpened = false;
   }
 
   openEmojiDialog() {
@@ -73,8 +75,14 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     dialogConfig.panelClass = 'emoji-dialog';
     dialogConfig.restoreFocus = false;
 
+    this.emojiDialog.afterOpened.subscribe(
+      () => this.emojiDialogOpened = true
+    );
+    this.emojiDialog.afterAllClosed.subscribe(
+      () => this.emojiDialogOpened = false
+    );
+
     this.emojiDialog.open(EmojiDialogComponent, dialogConfig);
-    
 }
 
   sendTextMessage() {
@@ -149,7 +157,6 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
           _messageMedia => {
             _messageMedia.type = type;
             this.messageMedia = _messageMedia;
-            console.log(_messageMedia.link, _messageMedia.type);
             this.sendMediaMessage();
           },
           response => {

@@ -13,10 +13,10 @@ import { UserProfile } from 'src/app/model/user.profile';
   styleUrls: ['./contacts-list.component.scss']
 })
 export class ContactsListComponent implements OnInit, OnDestroy {
-  private contactsAvatarsSrc = 'assets/images/avatars/medium';
+  contactsAvatarsSrc = 'assets/images/avatars/medium';
   
   private contactsSubscription: Subscription;
-  private contacts: Contact[] = [];
+  contacts: Contact[] = [];
 
   constructor(
     private contactListProfileBindingService: ContactListProfileBindingService,

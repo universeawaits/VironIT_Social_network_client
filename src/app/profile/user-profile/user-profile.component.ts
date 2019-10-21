@@ -8,6 +8,7 @@ import { ImageService, Image } from 'src/app/services/server/image.service';
 import { UserService } from 'src/app/services/server/user.service';
 import { Title } from '@angular/platform-browser';
 import { SnackbarService } from 'src/app/services/component/snackbar.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -19,11 +20,11 @@ export class UserProfileComponent implements OnInit {
   mode: string = 'view';
   changeModeIcon: string = 'edit';
 
-  private avatarSrc: string;
-  private avatarsSrc = 'https://localhost:44345/images/avatars/large/';
-  private user: UserProfile = new UserProfile();
+  avatarSrc: string;
+  avatarsSrc = environment.appUrl + 'images/avatars/large/';
+  user: UserProfile = new UserProfile();
 
-  private editForm: FormGroup;
+  editForm: FormGroup;
   private selectedFile: Image; 
 
   constructor(

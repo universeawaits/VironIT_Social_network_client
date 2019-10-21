@@ -3,12 +3,13 @@ import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Message } from '../../model/message';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {  
-  private hostUrl: string = 'https://localhost:44345/';
+  private hostUrl: string = environment.appUrl;
 
   messageReceived = new EventEmitter<Message>();
   connectionEstablished = new EventEmitter<Boolean>();  

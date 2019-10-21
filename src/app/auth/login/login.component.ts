@@ -12,7 +12,7 @@ import { SnackbarService } from 'src/app/services/component/snackbar.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private loginForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(
     private router: Router,

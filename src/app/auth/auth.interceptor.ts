@@ -8,8 +8,8 @@ import { AuthService } from '../services/server/auth.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     constructor(
-        private router: Router,
-        private authService: AuthService) { }
+        private router: Router
+        ) { }
  
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.headers.get('No-Auth') == "True") {
@@ -29,10 +29,8 @@ export class AuthInterceptor implements HttpInterceptor {
                             localStorage.removeItem('jwt:token');
                             this.router.navigate(['login']);
                         }
-
-                        if (err.status === 0) {
-                            this.router.navigate(['empty']);                            
-                        }
+                        
+                        this.router.navigate(['empty']);
                     })
               );
         }

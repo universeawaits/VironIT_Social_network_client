@@ -8,8 +8,8 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'skies';
-  private headerVisibility: boolean = false;
-  private route: string = '';
+  headerVisibility: boolean = false;
+  route: string = '';
 
   constructor (
     private router: Router

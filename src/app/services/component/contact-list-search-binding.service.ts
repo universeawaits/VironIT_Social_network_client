@@ -6,7 +6,7 @@ import { Contact } from 'src/app/model/contact';
   providedIn: 'root'
 })
 export class ContactListSearchBindingService {
-  private searchString = new Subject<string>();
+  searchString = new Subject<string>();
 
   constructor() { }
 

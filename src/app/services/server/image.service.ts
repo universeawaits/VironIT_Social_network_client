@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export class Image {
   constructor(public link: string, public file: File) { }
@@ -10,7 +11,7 @@ export class Image {
   providedIn: 'root'
 })
 export class ImageService {
-  private imagesUrl = 'https://localhost:44345/images';
+  private imagesUrl = environment.appUrl + 'images';
 
   constructor(
     private httpClient: HttpClient
@@ -32,7 +33,7 @@ export class ImageService {
 
   private createFormData(image: File): FormData {
     const formData = new FormData();
-    formData.append('image', image);
+    formData.append('file', image);
     formData.append('useremail', localStorage.getItem('jwt:email'));
 
     return formData;

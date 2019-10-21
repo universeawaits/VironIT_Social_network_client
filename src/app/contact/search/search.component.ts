@@ -8,7 +8,7 @@ import { ContactListSearchBindingService } from 'src/app/services/component/cont
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  private searchForm: FormGroup;
+  searchForm: FormGroup;
   
   constructor(
     private contactListSearchBindingService: ContactListSearchBindingService

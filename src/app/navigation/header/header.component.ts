@@ -11,7 +11,7 @@ interface Action {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private actions: Action[] = [
+  actions: Action[] = [
     { path: 'profile', icon: 'person' },
     { path: 'messages', icon: 'message' },
     { path: 'contacts', icon: 'contacts' }
