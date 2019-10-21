@@ -8,6 +8,9 @@ import { UserProfile } from 'src/app/model/user.profile';
 import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
 import { ContactService } from 'src/app/services/server/contact.service';
 import { SnackbarService } from 'src/app/services/component/snackbar.service';
+import { ShareContactMessageBindingService } from 'src/app/services/component/share-contact-message-binding.service';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { ShareContactDialogComponent } from '../share-contact-dialog/share-contact-dialog.component';
 
 @Component({
   selector: 'contact-profile',
@@ -27,7 +30,9 @@ export class ContactProfileComponent implements OnInit {
   constructor(
     private contactListProfileBindingService: ContactListProfileBindingService,
     private contactListSearchBindingService: ContactListSearchBindingService,
+    private shareContactService: ShareContactMessageBindingService,
     private contactService: ContactService,
+    private shareDialog: MatDialog,
     private snackbarService: SnackbarService
     ) {    
       this.contactSubscription = this.contactListProfileBindingService.getContact()
@@ -121,8 +126,17 @@ export class ContactProfileComponent implements OnInit {
     }
   }
 
-  share() {
+  openShareDialog() {
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.restoreFocus = false;
+    dialogConfig.panelClass = 'share-contact-container';
+
+    this.shareContactService.setContactToShare(this.contact);
+    this.shareDialog.open(ShareContactDialogComponent, dialogConfig);
   }
 
   changeIsContactStatus() {

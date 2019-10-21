@@ -5,11 +5,16 @@ import { Contact } from 'src/app/model/contact';
   providedIn: 'root'
 })
 export class ShareContactMessageBindingService {
-  contactSelected = new EventEmitter<Contact>();
-
+  contactToMessageSelected = new EventEmitter<Contact>();
+  contactToShare: Contact;
+  
   constructor() { }
 
-  shareContact(contact: Contact) {
-    this.contactSelected.emit(contact);
+  share(contactToMessage: Contact) {
+    this.contactToMessageSelected.emit(contactToMessage);
+  }
+
+  setContactToShare(contactToShare: Contact) {
+    this.contactToShare = contactToShare;
   }
 }

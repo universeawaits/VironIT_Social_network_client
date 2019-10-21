@@ -16,7 +16,7 @@
                 <div [class.message-from]="message.fromEmail == toEmail"
                 [class.message-to]="message.fromEmail == fromEmail">
                     {{ message.text }}
-                    <div *ngIf="message.messageMedia">
+                    <div *ngIf="message.type == 'Media'">
                         <img *ngIf="message.messageMedia.type == 'Image'" 
                             src="{{ message.messageMedia.link }}"
                             draggable="false">

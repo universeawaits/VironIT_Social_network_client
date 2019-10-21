@@ -1,12 +1,9 @@
-$emoji-container-width: 210px;
+$emoji-container-width: 190px;
 
 .emoji-container {
     height: $emoji-container-width;
     width: $emoji-container-width;
-    background: transparent;
-    backdrop-filter: blur(50px);
     overflow: auto;
-
     text-align: center;
 }
 

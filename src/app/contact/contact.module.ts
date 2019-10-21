@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SearchComponent } from './search/search.component';
 import { ShareContactDialogComponent } from './share-contact-dialog/share-contact-dialog.component';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,15 @@ import { ShareContactDialogComponent } from './share-contact-dialog/share-contac
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule,
+    MatListModule
   ],
   exports: [
     ContactsListComponent
+  ],
+  entryComponents: [
+    ShareContactDialogComponent
   ]
 })
 export class ContactModule { }

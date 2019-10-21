@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
 import { ContactService } from 'src/app/services/server/contact.service';
 import { SearchService } from 'src/app/services/server/search.service';
-import { UserProfile } from 'src/app/model/user.profile';
 
 @Component({
   selector: 'contacts-list',

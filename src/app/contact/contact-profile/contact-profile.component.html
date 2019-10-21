@@ -63,7 +63,7 @@
             <button *ngIf="!contact.isBlocked" mat-icon-button disableRipple (click)="changeIsBlockedStatus()">
                 <mat-icon>block</mat-icon>
             </button>
-            <button *ngIf="contact.isContact" mat-icon-button disableRipple (click)="share()">
+            <button *ngIf="contact.isContact" mat-icon-button disableRipple (click)="openShareDialog()">
                 <mat-icon>share</mat-icon>
             </button>
         </div>

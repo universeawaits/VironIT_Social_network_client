@@ -55,11 +55,9 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
             if (this.toEmail != contact.user.email) {
               this.toEmail = contact.user.email;
               this.messageService.getHistory(this.toEmail).subscribe(
-                messages => {
+                messages => { 
                   this.messages = messages;
-                }
-              );        
-
+                });
               this.receiver = contact;      
             }
         });
@@ -85,7 +83,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     );
 
     this.emojiDialog.open(EmojiDialogComponent, dialogConfig);
-}
+  }
 
   sendTextMessage() {
     if (this.messageText) {
@@ -117,7 +115,16 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
   }
 
   sendContact(contact: Contact) {
+    this.message = new Message();
+    this.message.fromEmail = this.fromEmail;
+    this.message.toEmail = contact.user.email;
+    this.message.dateTime = new Date();
+    this.message.forwardFromEmail = null;
+    this.message.text = contact.user.name + ' : ' + contact.user.email;
+    this.message.type = 'Contact';
+    this.message.messageMedia = null;
 
+    this.messageService.sendMessage(this.message);
   }
 
   clearHistory() {
@@ -139,10 +146,9 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
         this.messageText += emoji
     );
 
-    this.shareContactService.contactSelected.subscribe(contact =>
-      this._ngZone.run(() => {
-        
-      })
+    this.shareContactService.contactToMessageSelected.subscribe(contact => {
+        this.sendContact(this.shareContactService.contactToShare); 
+      }
     );
   }
 
