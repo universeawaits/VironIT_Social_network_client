@@ -1,4 +1,4 @@
-$conversation-space-width: 380px;
+$conversation-space-width: 420px;
 $conversation-space-height: 500px;
 
 .conversation-space-container {
@@ -116,18 +116,27 @@ $conversation-space-height: 500px;
     transition: all 0.2s ease-in;
 }
 
+$media-content-width: $conversation-space-width - 130px;
+
 .message-container img {
-    width: $conversation-space-width - 100px;
+    width: $media-content-width;
     padding: 1px;
     border: 4px solid rgba($color: #5e5e5e, $alpha: 0.2);
   
-    transition: all 0.2s ease-in;
     cursor: default;
 }
 
 audio {
-    width: $conversation-space-width - 100px;
+    width: $media-content-width;
     height: 25px;
+    border-radius: 0;
+    outline: transparent;
+}
+
+video {
+    width: $media-content-width;
+    padding: 1px;
+    border: 4px solid rgba($color: #5e5e5e, $alpha: 0.2);
     border-radius: 0;
     outline: transparent;
 }

@@ -1,5 +1,5 @@
 $avatar-width: 200px;
-$success: #6affa8;
+$success: #5eceb5;
 $online: $success;
 
 .contact-card {
@@ -45,7 +45,7 @@ $online: $success;
 .contact-card-header {
     word-break: break-all;
 
-    margin: 15px;
+    margin: 20px;
 
     text-shadow: 0 0 3px #e4e4e4;
     font-size: 24px;
@@ -69,9 +69,9 @@ $online: $success;
 
 .contact-card-content {
     word-break: break-all;
-    font-size: 16px;
+    font-size: 17px;
 
-    margin:  0 15px 15px 15px;
+    margin:  10px 15px 15px 15px;
     transition: all 0.5s ease-in;
 }
 

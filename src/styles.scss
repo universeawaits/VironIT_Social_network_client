@@ -182,7 +182,7 @@ $mat-accent: (
 $theme-accent: mat-palette($mat-accent, main, lighter, darker);
 
 body {
-  --warn-color: #ff2e2e;
+  --warn-color: #d15b67;
   --warn-lighter-color: #ffc0c0;
   --warn-darker-color: #ff1d1d;
   --text-warn-color: $light-primary-text;
@@ -191,7 +191,7 @@ body {
 }
 
 $mat-warn: (
-  main: #ff2e2e,
+  main: #d15b67,
   lighter: #ffc0c0,
   darker: #ff1d1d,
   200: #ff2e2e, // For slide toggle,
@@ -218,8 +218,8 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-  $success: #31ff87;
-  $error: #eb3f56;
+  $success: #5eceb5;
+  $error: #d15b67;
 
   .mat-snack-bar-container {
       background: transparent;
@@ -317,8 +317,6 @@ body {
 
 mat-error {
   font-size: 12px;
-  
-  text-shadow: 0 0 5px $dark-text;
 }
 
 mat-form-field {

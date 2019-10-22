@@ -24,6 +24,10 @@
                             controls preload="metadata"
                             src="{{ message.messageMedia.link }}">
                         </audio>
+                        <video *ngIf="message.messageMedia.type == 'Video'"
+                            controls preload="metadata"
+                            src="{{ message.messageMedia.link }}">
+                        </video>
                     </div>
                 </div>
             </div>
