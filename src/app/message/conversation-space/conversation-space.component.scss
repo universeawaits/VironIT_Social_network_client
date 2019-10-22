@@ -140,3 +140,8 @@ video {
     border-radius: 0;
     outline: transparent;
 }
+
+.contacts-button:hover {
+    background-color: transparent !important;
+    text-shadow: 0 0 4px rgba($color: #e4e4e4, $alpha: 0.2);
+}

@@ -15,7 +15,8 @@
             <div *ngFor="let message of messages" class="message-container">
                 <div [class.message-from]="message.fromEmail == toEmail"
                 [class.message-to]="message.fromEmail == fromEmail">
-                    <button *ngIf="message.type == 'Contact'" 
+                    <button *ngIf="message.type == 'Contact'"
+                        disableRipple class="contacts-button" mat-button 
                         (click)="openSharedContactProfileDialog(message.text)">
                         {{ message.text }}
                     </button>
