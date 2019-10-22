@@ -1,4 +1,4 @@
-<mat-card class="profile-card mat-elevation-z14" [class.profile-card-edit-mode]="mode == 'edit'">
+<mat-card class="profile-card mat-elevation-z10" [class.profile-card-edit-mode]="mode == 'edit'">
     <form [formGroup]="editForm">
         <div *ngIf="mode == 'view'" class="profile-card-header">{{ user.name }}</div>
         <div *ngIf="mode == 'edit'">

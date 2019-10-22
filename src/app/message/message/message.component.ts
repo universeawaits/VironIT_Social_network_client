@@ -13,6 +13,6 @@ export class MessageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('ferns :: messages');
+    this.titleService.setTitle('skies :: messages');
   }
 }

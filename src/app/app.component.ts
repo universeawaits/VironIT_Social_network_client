@@ -7,7 +7,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ferns';
+  title = 'skies';
   headerVisibility: boolean = false;
   route: string = '';
 

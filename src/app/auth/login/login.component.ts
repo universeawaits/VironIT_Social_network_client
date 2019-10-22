@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('ferns :: login');
+    this.titleService.setTitle('skies :: login');
 
     this.loginForm = new FormGroup({
       login: new FormControl(null, Validators.required),

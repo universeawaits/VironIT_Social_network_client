@@ -218,7 +218,7 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-  $success: #5eceb5;
+  $success: #5ece90;
   $error: #d15b67;
 
   .mat-snack-bar-container {

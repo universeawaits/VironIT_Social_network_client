@@ -1,9 +1,9 @@
-<div class="contact-list mat-elevation-z14">
+<div class="contact-list mat-elevation-z10">
     <mat-list [class.mat-list-no-search-results]="contacts && !contacts.length">
         <mat-list-item *ngFor="let contact of contacts" (click)="selectContact(contact)">
             <img matListAvatar
                 src="{{ contact.user.avatar }}" 
-                class="contact-avatar mat-elevation-z14"
+                class="contact-avatar mat-elevation-z3"
                 [class.contact-avatar-online]="contact.isOnline">
             <h4 mat-line>{{ viewName(contact) }}</h4>
         </mat-list-item>
