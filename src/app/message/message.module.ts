@@ -10,8 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
 import { MatDialogModule, MatSnackBarModule } from "@angular/material";
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
-
+import { ContactProfileComponent } from '../contact/contact-profile/contact-profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ConversationSpaceComponent
   ],
   entryComponents: [
-    EmojiDialogComponent
+    EmojiDialogComponent,
+    ContactProfileComponent
   ]
 })
 export class MessageModule { }

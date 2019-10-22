@@ -17,4 +17,8 @@ export class ContactListSearchBindingService {
   searchContacts(emailOrPhone: string) {
     this.searchString.next(emailOrPhone);
   }
+
+  searchByFullEmail () {
+    
+  }
 }

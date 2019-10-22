@@ -13,6 +13,12 @@ import { MediaService } from 'src/app/services/server/media.service';
 import { MessageMedia } from 'src/app/model/message-media';
 import { SnackbarService } from 'src/app/services/component/snackbar.service';
 import { ShareContactMessageBindingService } from 'src/app/services/component/share-contact-message-binding.service';
+import { environment } from 'src/environments/environment';
+import { ContactProfileComponent } from 'src/app/contact/contact-profile/contact-profile.component';
+import { ContactService } from 'src/app/services/server/contact.service';
+import { SearchService } from 'src/app/services/server/search.service';
+import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
+import { ShareContactProfileBindingService } from 'src/app/services/component/share-contact-profile-binding.service';
 
 @Component({
   selector: 'conversation-space',
@@ -41,9 +47,12 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     private messageContactBindingService: ContactListProfileBindingService,
     private emojiService: EmojiIntoMessageService,
     private shareContactService: ShareContactMessageBindingService,
+    private shareProfileBindingService: ShareContactProfileBindingService,
     private emojiDialog: MatDialog,
+    private sharedContactProfileDialog: MatDialog,
     private snackbarService: SnackbarService,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private searchService: SearchService,
   ) {
     this.subscribeToEvents();
   }
@@ -57,6 +66,12 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
               this.messageService.getHistory(this.toEmail).subscribe(
                 messages => { 
                   this.messages = messages;
+                  this.messages.forEach(
+                    message => {
+                      if (message.type == 'Media') {
+                        message.messageMedia.link = environment.appUrl + message.messageMedia.link;
+                      }
+                    });
                 });
               this.receiver = contact;      
             }
@@ -114,17 +129,32 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     this.messageService.sendMessage(this.message);
   }
 
-  sendContact(contact: Contact) {
+  sendContact(contact: Contact, contactToMessage: Contact) {
     this.message = new Message();
     this.message.fromEmail = this.fromEmail;
-    this.message.toEmail = contact.user.email;
+    this.message.toEmail = contactToMessage.user.email;
     this.message.dateTime = new Date();
     this.message.forwardFromEmail = null;
-    this.message.text = contact.user.name + ' : ' + contact.user.email;
+    this.message.text = contact.user.email;
     this.message.type = 'Contact';
     this.message.messageMedia = null;
 
     this.messageService.sendMessage(this.message);
+  }
+
+  openSharedContactProfileDialog(email: string) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.restoreFocus = false;
+    this.searchService.getByFullEmail(email).subscribe(
+      _contact => {
+        this.sharedContactProfileDialog.open(ContactProfileComponent, dialogConfig);
+        this.shareProfileBindingService.loadContact(_contact);
+      }
+    );
   }
 
   clearHistory() {
@@ -138,6 +168,9 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
   private subscribeToEvents() {
     this.messageService.messageReceived.subscribe((message: Message) => {  
       this._ngZone.run(() => {
+        if (message.type == 'Media') {
+          message.messageMedia.link = environment.appUrl + message.messageMedia.link;
+        }
         this.messages.push(message);
       });
     });
@@ -147,7 +180,7 @@ export class ConversationSpaceComponent implements OnInit, OnDestroy {
     );
 
     this.shareContactService.contactToMessageSelected.subscribe(contact => {
-        this.sendContact(this.shareContactService.contactToShare); 
+        this.sendContact(this.shareContactService.contactToShare, contact);
       }
     );
   }

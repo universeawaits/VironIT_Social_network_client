@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
 import { ContactService } from 'src/app/services/server/contact.service';
 import { SearchService } from 'src/app/services/server/search.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'contacts-list',
@@ -34,6 +35,8 @@ export class ContactsListComponent implements OnInit, OnDestroy {
                   probContacts.forEach(probContact => {
                     if (!probContact.user.avatar) {
                       probContact.user.avatar = this.contactsAvatarsSrc + '/account.jpg';
+                    } else {
+                      probContact.user.avatar = environment.appUrl + probContact.user.avatar;
                     }
                   });
                   this.contacts = probContacts.filter(
@@ -54,6 +57,8 @@ export class ContactsListComponent implements OnInit, OnDestroy {
         contacts.forEach(contact => {
           if (!contact.user.avatar) {
             contact.user.avatar = this.contactsAvatarsSrc + '/account.jpg';
+          } else {
+            contact.user.avatar = environment.appUrl + contact.user.avatar;
           }
         });
         this.contacts = contacts;

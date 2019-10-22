@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareContactMessageBindingService } from 'src/app/services/component/share-contact-message-binding.service';
-import { ContactsListComponent } from '../contacts-list/contacts-list.component';
 import { Contact } from 'src/app/model/contact';
 import { ContactService } from 'src/app/services/server/contact.service';
 import { SnackbarService } from 'src/app/services/component/snackbar.service';

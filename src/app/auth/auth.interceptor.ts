@@ -26,11 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
                     succ => { }, 
                     err => {
                         if (err.status === 401) {
-                            localStorage.removeItem('jwt:token');                        
-                            this.router.navigate(['login']);
+                            localStorage.removeItem('jwt:token');
                         }
 
-                        this.router.navigate(['empty']);
+                        this.router.navigate(['login']);
                     })
               );
         }

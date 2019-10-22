@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('skies :: profile');
+    this.titleService.setTitle('ferns :: profile');
 
     this.editForm = new FormGroup({
       name: new FormControl('', [ 
@@ -57,6 +57,8 @@ export class UserProfileComponent implements OnInit {
         this.user = user;
         if (!this.user.avatar) {
           this.user.avatar = 'assets/images/avatars/large/account.jpg'
+        } else {
+          this.user.avatar = environment.appUrl + this.user.avatar;
         }
         this.editForm.get('name').setValue(this.user.name);
       }

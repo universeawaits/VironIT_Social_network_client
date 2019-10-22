@@ -15,7 +15,13 @@
             <div *ngFor="let message of messages" class="message-container">
                 <div [class.message-from]="message.fromEmail == toEmail"
                 [class.message-to]="message.fromEmail == fromEmail">
-                    {{ message.text }}
+                    <button *ngIf="message.type == 'Contact'" 
+                        (click)="openSharedContactProfileDialog(message.text)">
+                        {{ message.text }}
+                    </button>
+                    <span *ngIf="message.type == 'Text'">
+                        {{ message.text }}
+                    </span>
                     <div *ngIf="message.type == 'Media'">
                         <img *ngIf="message.messageMedia.type == 'Image'" 
                             src="{{ message.messageMedia.link }}"

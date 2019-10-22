@@ -23,7 +23,7 @@ export class UserRegisterComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('skies :: register');
+    this.titleService.setTitle('ferns :: register');
 
     this.registerForm = new FormGroup({
       name: new FormControl(null, [

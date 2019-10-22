@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Contact } from 'src/app/model/contact';
 import { ContactListProfileBindingService } from 'src/app/services/component/contact-list-profile-binding.service';
 import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserProfile } from 'src/app/model/user.profile';
 import { ContactListSearchBindingService } from 'src/app/services/component/contact-list-search-binding.service';
@@ -11,6 +10,7 @@ import { SnackbarService } from 'src/app/services/component/snackbar.service';
 import { ShareContactMessageBindingService } from 'src/app/services/component/share-contact-message-binding.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ShareContactDialogComponent } from '../share-contact-dialog/share-contact-dialog.component';
+import { ShareContactProfileBindingService } from 'src/app/services/component/share-contact-profile-binding.service';
 
 @Component({
   selector: 'contact-profile',
@@ -31,6 +31,7 @@ export class ContactProfileComponent implements OnInit {
     private contactListProfileBindingService: ContactListProfileBindingService,
     private contactListSearchBindingService: ContactListSearchBindingService,
     private shareContactService: ShareContactMessageBindingService,
+    private shareProfileBindingService: ShareContactProfileBindingService,
     private contactService: ContactService,
     private shareDialog: MatDialog,
     private snackbarService: SnackbarService
@@ -68,6 +69,13 @@ export class ContactProfileComponent implements OnInit {
     this.editForm.get('pseudonym').markAsUntouched();
 
     this.contact = null;
+    
+    this.shareProfileBindingService.contactLoaded.subscribe(
+      contact => {
+        console.log(contact.lastSeen)
+        this.contact = contact;
+      }
+    )
    }
 
   changeIsBlockedStatus() {
@@ -155,5 +163,7 @@ export class ContactProfileComponent implements OnInit {
   ngOnDestroy() {
     this.contactSubscription.unsubscribe();
     this.searchModeSubscription.unsubscribe();
+
+    this.shareDialog.closeAll();
   }
 }

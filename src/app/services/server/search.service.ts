@@ -22,4 +22,13 @@ export class SearchService {
     );
     return result;
   }
+
+  getByFullEmail(email: string): Observable<Contact> {
+    let result = new Observable<Contact>();
+    result = this.httpClient.get<Contact>(
+      this.searchUrl + '?email=' + email,
+      { headers: { 'Authorization' : 'Bearer ' + localStorage.getItem('jwt:token')} }
+    );
+    return result;
+  }
 }
